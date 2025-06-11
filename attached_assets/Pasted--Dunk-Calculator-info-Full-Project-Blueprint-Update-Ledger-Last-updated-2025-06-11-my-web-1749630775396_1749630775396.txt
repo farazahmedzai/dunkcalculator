@@ -1,0 +1,329 @@
+
+# Dunk‑Calculator.info – Full Project Blueprint & Update Ledger
+**Last updated:** 2025-06-11
+my website url is https://dunk-calculator.info/
+
+please make .md files for tracking every thing
+---
+
+## 0 Change‑Log & SERP‑Driven Additions
+
+| Date | Section Touched | What Changed & Why |
+|------|-----------------|--------------------|
+| 2025-06-11 | Homepage (3.1) | Added **“How the Dunk Calculator Works”** section, detailed physics formulas, interactive‑graph placeholder, expanded FAQ, updated title tag & meta description. Reflects features found in top‑ranking pages (OmniCalculator, TheHoopsGeek). |
+| 2025-06-11 | Global Schema | Nested `HowTo` JSON‑LD for calculator steps; enriched `SoftwareApplication` with `softwareVersion`, `applicationCategory`, and `operatingSystem` fields. Improves rich‑result eligibility. |
+| 2025-06-11 | Media & Accessibility | Replaced PNG hero with optimised WebP (< 80 kB), added descriptive ALT text, and aria‑labels to form controls. |
+| 2025-06-11 | Internal Links | Added cross‑links from formulas section to **/how-to-dunk-a-basketball/** and **/dunking-requirements-by-height/**; ensured up‑ and side‑links respect 3‑5‑internal‑link rule. |
+| 2025-06-11 | Technical | Pre‑allocated 140 px for result‑graph container to guard CLS; kept INP optimisation wrapper around calc JS. |
+
+---
+
+# 1 Pre‑Build Checklist (Day 0)
+
+| Task                                          | Why                   | How                                       |
+| --------------------------------------------- | --------------------- | ----------------------------------------- |
+| Pick fast host (e.g., Cloudways + LiteSpeed)  | Core Web Vitals       | Provision PHP 8+, enable HTTP/2           |
+| Install WP + block theme (or Astro if static) | Ease of CMS           | Disable unused plugins                    |
+| Add SEO suite (RankMath Pro)                  | Schema & sitemap auto | Turn on BreadcrumbList, ItemList, FAQPage |
+| Create **/staging** subdomain                 | Safe dev              | Clone site for edits                      |
+
+---
+
+# 2 Macro Architecture
+
+```
+/
+├ calculators/                 ← Pillar 1 hub
+│   ├ dunk-calculator/         (also home)
+│   ├ vertical-jump-calculator/
+│   ├ standing-reach-calculator/
+│   ├ approach-vs-standing-jump-calculator/
+│   ├ jump-fatigue-calculator/
+│   ├ max-potential-jump-calculator/
+│   └ ideal-body-weight-jump-calculator/
+├ vertical-jump-training/      ← Pillar 2 hub
+│   ├ 12-week-program/
+│   ├ at-home-bodyweight-jump-program/
+│   ├ advanced-shock-method-plyometrics/
+│   ├ exercises/
+│   │   ├ plyometric-exercises/
+│   │   ├ strength-exercises/
+│   │   ├ isometric-exercises/
+│   │   └ stretching-mobility/
+│   ├ guides/
+│   │   ├ improving-jump-technique/
+│   │   └ how-to-measure-vertical-jump/
+│   └ blog/one-foot-vs-two-foot-jumping/
+├ athletic-performance/        ← Pillar 3 hub
+│   ├ science/
+│   │   ├ biomechanics-of-jumping/
+│   │   ├ fast-twitch-vs-slow-twitch/
+│   │   └ cns-role-in-jumping/
+│   ├ nutrition/
+│   │   ├ explosive-power-meals/
+│   │   ├ supplements-for-jump-performance/
+│   │   └ hydration-for-athletes/
+│   ├ gear/
+│   │   ├ best-basketball-shoes/
+│   │   └ best-plyo-boxes/
+│   └ recovery/
+│       ├ preventing-jumpers-knee/
+│       ├ active-recovery-techniques/
+│       └ safe-landing-from-jumps/
+├ can-i-dunk/
+├ how-to-dunk-a-basketball/
+├ dunking-requirements-by-height/
+├ guides/types-of-dunks-explained/
+├ blog/how-to-palm-a-basketball/
+├ about/  contact/  privacy-policy/
+```
+
+---
+
+# 3 Page‑by‑Page Blueprint
+
+*(Keyword • target word count • exact H‑tag skeleton • internal‑link rules)*
+
+## 3.1 Homepage = **/dunk-calculator/** (also root) **← UPDATED**
+
+* **Primary KW:** dunk calculator  
+* **Words:** *2 300* (≈ 75 % copy below the fold)  
+* **Title Tag:** `Dunk Calculator – Exact Vertical Jump Needed to Dunk | Dunk‑Calculator.info` (59 chars)  
+* **Meta Description:** `Instant dunk calculator shows the exact vertical jump, hang‑time & power you need to slam. Interactive graph, physics formulas, free training plan.`  
+* **Schema:** `SoftwareApplication` + nested `HowTo` (3 steps) + `FAQPage`  
+* **H‑Tag Skeleton**
+
+```markdown
+H1 Dunk Calculator – See Exactly What You Need to Fly
+H2 Instant Results, Visualized
+H2 How the Dunk Calculator Works
+  H3 Step 1 – Enter Standing Reach & Height
+  H3 Step 2 – Set Rim Height & Clearance
+  H3 Step 3 – Get Vertical, Hang‑Time & Energy
+H2 Physics & Formulas Behind Your Jump
+  H3 Minimum Vertical Leap Formula
+  H3 Hang Time & Take‑Off Velocity
+  H3 Jumping Energy & Power‑to‑Weight Ratio
+H2 What Influences Dunking Ability?
+  H3 Height & Standing Reach
+  H3 Vertical Jump – Standing vs. Approach
+  H3 Hand Size & Ball Control
+  H3 Power‑to‑Weight Ratio
+  H3 Technique & Timing
+H2 Improve Your Vertical Jump Today  *(CTA → /vertical-jump-training/)*
+H2 Ready to Close the Gap?  *(3 cards → each pillar hub)*
+H2 Advanced Tools for Serious Jumpers  *(UL → 6 sibling calculators)*
+H2 Real‑World Case Studies & FAQs  *(FAQPage schema – 6 Qs)*
+```
+
+* **Internal Links**
+  * Up: /calculators/
+  * Across: /vertical-jump-training/, /athletic-performance/hydration-for-athletes/
+  * Down-silo: /dunking-requirements-by-height/, /how-to-dunk-a-basketball/, etc.
+* **Extra Elements**
+  * `<div id="jump-graph"></div>` pre‑allocated to avoid CLS.
+  * WebP hero (`dunk-calculator-hero.webp`, < 80 kB), ALT: “basketball player dunk calculator demo”.
+
+---
+
+## 3.2 Pillar 1 Hub — **/calculators/**
+
+* **KW:** basketball calculators  
+* **Words:** *1 200*  
+* **H‑Tags**
+
+```markdown
+H1 Jump & Dunk Calculators – Pick Your Weapon
+H2 Core Tools
+H2 Performance & Progress Tools
+H2 How to Use Each Calculator (ItemList schema list=7)
+```
+
+* **Links**: Down to all calculators; CTA across to **/vertical-jump-training/**.
+
+### 3.2.1 Child Calculator Template
+
+| Field      | Value                                                                                      |
+| ---------- | ------------------------------------------------------------------------------------------ |
+| Word count | *800* (≈ 400 intro + 400 “improve” tips)                                                   |
+| H‑tags     | `H1 <tool name>` → `H2 How to Use` → `H2 What Your Result Means` → `H2 Improve Your Score` |
+| Schema     | `SoftwareApplication` + `FAQPage` (3 Qs)                                                   |
+| Links      | Up to /calculators/, Side to matching guide in Pillar 2 or 3, CTA back to home tool        |
+| CTA        | Sticky button “Save result & get free 8‑week plan → email capture”                         |
+
+---
+
+## 3.3 Pillar 2 Hub — **/vertical-jump-training/**
+
+* **KW:** vertical jump training  
+* **Words:** *2 500*  
+* **H‑Tags**
+
+```markdown
+H1 The Ultimate Vertical‑Jump Training Hub
+H2 The Four Pillars of a Bigger Vertical  (Strength / Power / Technique / Recovery)
+H2 Select Your Path
+  H3 12‑Week Gym Program
+  H3 At‑Home Bodyweight Plan
+  H3 Shock‑Method Plyometrics
+H2 Drill & Exercise Libraries
+H2 Measurement & Technique Guides
+H2 Track Progress with These Calculators
+```
+
+* **Internal‑Link Matrix**
+  * Down to every program & exercise guide.
+  * Across to key recovery pages in athletic‑performance.
+  * Up to /vertical-jump-calculator/ with anchor “calculate your vertical first”.
+
+### 3.3.x Child Pages
+
+| URL                                 | Words | Purpose                                              |
+| ----------------------------------- | ----- | ---------------------------------------------------- |
+| /12-week-program/                   | 5 000 | cornerstone; week‑by‑week tables                     |
+| /at-home-bodyweight-jump-program/   | 3 000 | beginner‑friendly                                    |
+| /advanced-shock-method-plyometrics/ | 2 500 | advanced niche                                       |
+| Each exercise guide                 | 1 200 | includes 5–8 GIFs                                    |
+| improving-jump-technique            | 1 800 | links heavily to how‑to‑dunk guide                   |
+
+---
+
+## 3.4 Pillar 3 Hub — **/athletic-performance/**
+
+* **KW:** athletic performance science  
+* **Words:** *2 000*  
+* **H‑Tags**
+
+```markdown
+H1 Athletic Performance for Jump Athletes – Science & Fuel
+H2 Sports‑Science Deep Dives
+H2 Eat & Hydrate for Explosive Power
+H2 Gear & Equipment Reviews
+H2 Injury Prevention & Recovery
+```
+
+* **Links**
+  * Down to each sub‑silo.
+  * CTA up to calculators hub (ideal body‑weight calculator).
+  * Cross‑link to training pillar when strength or plyo mentioned.
+
+### Recovery & Nutrition Guides
+
+| URL                              | Words |
+| -------------------------------- | ----- |
+| preventing-jumpers-knee          | 2 200 |
+| active-recovery-techniques       | 1 500 |
+| supplements-for-jump-performance | 2 000 |
+| hydration-for-athletes           | 1 200 |
+| safe-landing-from-jumps          | 1 000 |
+
+---
+
+## 3.5 Standalone Dunking Guides
+
+| URL                               | Words | Notes                                 |
+| --------------------------------- | ----- | ------------------------------------- |
+| /how-to-dunk-a-basketball/        | 3 000 | links to technique guide & calculators |
+| /can-i-dunk/                      | 1 000 | points users to home calculator       |
+| /dunking-requirements-by-height/  | 1 400 | table: height vs needed vertical       |
+| /guides/types-of-dunks-explained/ | 2 000 | 15 animated GIFs                      |
+| /blog/how-to-palm-a-basketball/   | 900   | interlinks to hand‑size FAQ           |
+
+---
+
+# 4 Global On‑Page Rules
+
+* **Title tag:** KW first | brand last | ≤ 60 chars  
+* **Meta:** 150–160 chars; include benefit + KW  
+* **URL:** lowercase, hyphen, no stop‑words  
+* **First 100 words:** primary KW + brand mention  
+* **Images:** WebP < 80 kB, descriptive ALT, lazy‑load  
+* **Links per page:** 3‑5 internal (1 up, 1 side, rest down), 1–2 outbound authority  
+* **Schema Mapping**
+  * Calculators → `SoftwareApplication` (+ rating once reviews arrive)
+  * Guides → `HowTo` or `Article` + `FAQPage`
+  * Blog posts → `Article`
+  * Pillar hubs → `ItemList` of children  
+
+---
+
+# 5 Internal‑Link Playbook
+
+| From (spoke)                        | To (up)                               | Anchor text               |
+| ----------------------------------- | ------------------------------------- | ------------------------- |
+| /exercises/strength-exercises/      | /vertical-jump-training/              | vertical‑jump hub         |
+| /blog/one-foot-vs-two-foot-jumping/ | /guides/improving-jump-technique/     | jump‑form guide           |
+| /hydration-for-athletes/            | /calculators/jump-fatigue-calculator/ | fight jump fatigue        |
+| /preventing-jumpers-knee/           | /recovery/active-recovery-techniques/ | active recovery tips      |
+| Every program page                  | nearest calculator                    | track your progress       |
+
+* **Anchor‑rotation rule:** max 30 % exact, 20 % brand, 50 % descriptive.
+
+---
+
+# 6 Technical & Performance Setup
+
+1. **CLS guard:** pre‑allocate result‑box & graph containers (≈ 140 px).  
+2. **INP:** wrap heavy JS in `requestAnimationFrame`.  
+3. **Service Worker:** cache CSS/JS & JSON for 1 h.  
+4. **robots.txt:** allow all; block `/cgi-bin/`.  
+5. **XML Sitemap:** auto daily; ping GSC API.  
+6. **OpenGraph/Twitter:** custom OG image per calculator (diagram).  
+7. **Security:** HSTS preload + automated cert renewal.
+
+---
+
+# 7 Launch Sequence (D‑Day)
+
+1. Publish pillar hubs + calculators first.  
+2. Run Screaming Frog → fix 404/redirects = 0 errors.  
+3. Bulk **Request Indexing** via GSC API (11 URLs).  
+4. Set up SERPRobot project (50 KWs).  
+5. Add Cloudflare Zaraz RUM & PSI monitoring.  
+6. Release first guest post → backlink to calculators hub.
+
+---
+
+# 8 Content‑Production Calendar (Weeks 1–12)
+
+| Week | Deliverables                                     | Words             |
+| ---- | ------------------------------------------------ | ----------------- |
+| 1    | 12‑week gym program + 3 calculators              | 5 000 + (3× 800)  |
+| 2    | Home hero copy + ItemList hub + plyometric guide | 2 300 + 1 200     |
+| 3    | Strength‑exercises guide + hydration blog        | 1 200 + 1 200     |
+| 4    | Technique guide + safe‑landing post              | 1 800 + 1 000     |
+| 5    | Body‑weight program + supplements guide          | 3 000 + 2 000     |
+| 6    | Jump‑fatigue calc + recovery guide               | 800 + 1 500       |
+| 7    | Fast‑twitch article + box‑plyo gear review       | 1 500 + 1 200     |
+| 8    | Shock‑method program + jumper’s‑knee guide       | 2 500 + 2 200     |
+| 9    | At least 3 interlink‑refresh edits               | —                 |
+| 10   | Max‑potential calc + palm‑size blog              | 800 + 900         |
+| 11   | Ideal‑body‑weight calc + CNS post                | 800 + 1 400       |
+| 12   | Types‑of‑dunks guide + outreach infographic      | 2 000 + (1 Canva) |
+
+---
+
+# 9 Ongoing (Month 4+)
+
+* **Monthly:** content gap audit (Ahrefs vs top 10).  
+* **Quarterly:** CWV field‑data review (via Zaraz).  
+* **≥ 1 000 sessions/week on a calculator:** add rating schema & review snippet.  
+* **Link building:** 5 resource‑page wins + 1 podcast guest per month.
+
+---
+
+## Done‑For‑You Headline Cheatsheet
+
+* The Ultimate Dunk Calculator (Home)  
+* Jump‑Fatigue Calculator – Measure Drop‑Off Instantly  
+* Ideal Body‑Weight for Explosive Hops  
+* At‑Home Bodyweight Jump Program (No Gear)  
+* Prevent Jumper’s Knee – Complete Guide  
+
+---
+
+### Final Reminder
+
+Stick to the folder logic, hit the word counts, rotate anchors, and embed the schema exactly as mapped. Do that, and **Dunk‑Calculator.info** will be so structurally perfect that Google’s crawler will high‑five you on the way through.
+
+**Now build it and own those SERPs.** 🏀🚀
