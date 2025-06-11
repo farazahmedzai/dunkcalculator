@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import DunkCalculator from "@/components/dunk-calculator";
 import CalculatorResults from "@/components/calculator-results";
 import JumpVisualization from "@/components/jump-visualization";
@@ -398,9 +399,11 @@ export default function Home() {
                     Jump Fatigue Analysis
                   </li>
                 </ul>
-                <Button className="w-full bg-orange-600 text-white hover:bg-orange-700 font-semibold">
-                  Explore All Calculators
-                </Button>
+                <Link href="/calculators">
+                  <Button className="w-full bg-orange-600 text-white hover:bg-orange-700 font-semibold">
+                    Explore All Calculators
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -442,9 +445,11 @@ export default function Home() {
                     Exercise Video Library
                   </li>
                 </ul>
-                <Button className="w-full bg-blue-600 text-white hover:bg-blue-700 font-semibold">
-                  Start Training Today
-                </Button>
+                <Link href="/vertical-jump-training">
+                  <Button className="w-full bg-blue-600 text-white hover:bg-blue-700 font-semibold">
+                    Start Training Today
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -486,9 +491,11 @@ export default function Home() {
                     Equipment Reviews
                   </li>
                 </ul>
-                <Button className="w-full bg-green-600 text-white hover:bg-green-700 font-semibold">
-                  Optimize Performance
-                </Button>
+                <Link href="/athletic-performance">
+                  <Button className="w-full bg-green-600 text-white hover:bg-green-700 font-semibold">
+                    Optimize Performance
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

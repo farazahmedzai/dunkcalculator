@@ -11,6 +11,10 @@ import ApproachVsStandingJumpCalculator from "@/pages/approach-vs-standing-jump-
 import JumpFatigueCalculator from "@/pages/jump-fatigue-calculator";
 import MaxPotentialJumpCalculator from "@/pages/max-potential-jump-calculator";
 import IdealBodyWeightJumpCalculator from "@/pages/ideal-body-weight-jump-calculator";
+import VerticalJumpTraining from "@/pages/vertical-jump-training";
+import AthleticPerformance from "@/pages/athletic-performance";
+import CanIDunk from "@/pages/can-i-dunk";
+import HowToDunkABasketball from "@/pages/how-to-dunk-a-basketball";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,6 +28,10 @@ function Router() {
       <Route path="/calculators/jump-fatigue-calculator" component={JumpFatigueCalculator} />
       <Route path="/calculators/max-potential-jump-calculator" component={MaxPotentialJumpCalculator} />
       <Route path="/calculators/ideal-body-weight-jump-calculator" component={IdealBodyWeightJumpCalculator} />
+      <Route path="/vertical-jump-training" component={VerticalJumpTraining} />
+      <Route path="/athletic-performance" component={AthleticPerformance} />
+      <Route path="/can-i-dunk" component={CanIDunk} />
+      <Route path="/how-to-dunk-a-basketball" component={HowToDunkABasketball} />
       <Route component={NotFound} />
     </Switch>
   );
