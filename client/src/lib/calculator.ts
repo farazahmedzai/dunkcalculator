@@ -101,8 +101,8 @@ export function calculateVerticalFromHangTime(hangTime: number): number {
   if (hangTime <= 0) return 0;
   
   const gravity = 32.174; // ft/s²
-  const timeTopeak = hangTime / 2;
-  const jumpHeightFeet = (gravity * timeTopeak * timeToeak) / 2;
+  const timeToPeak = hangTime / 2;
+  const jumpHeightFeet = (gravity * timeToPeak * timeToPeak) / 2;
   
   return jumpHeightFeet * 12; // Convert to inches
 }
