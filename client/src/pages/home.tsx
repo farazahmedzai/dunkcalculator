@@ -76,17 +76,17 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-basketball-orange to-red-500 text-white py-16">
+      <section className="bg-gradient-to-br from-orange-600 to-red-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
             Dunk Calculator – See Exactly What You Need to Fly
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-orange-100 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto drop-shadow-md">
             Calculate your exact vertical jump requirements, hang-time, and power needed to dunk with scientific precision
           </p>
           <Button
             onClick={() => scrollToSection('calculator')}
-            className="bg-white text-basketball-orange px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all transform hover:scale-105"
+            className="bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all transform hover:scale-105 border-2 border-white"
             size="lg"
           >
             Start Calculating
@@ -222,7 +222,7 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-basketball-orange to-red-500 text-white">
+              <Card className="bg-gradient-to-br from-orange-600 to-red-600 text-white">
                 <CardContent className="p-6">
                   <h3 className="text-xl font-semibold mb-4">The Complete Picture</h3>
                   <p className="mb-4">
@@ -230,7 +230,7 @@ export default function Home() {
                   </p>
                   <Button 
                     onClick={() => scrollToSection('calculator')}
-                    className="bg-white text-basketball-orange hover:bg-gray-100"
+                    className="bg-white text-orange-600 hover:bg-gray-100 font-semibold"
                   >
                     Calculate Your Requirements
                   </Button>
@@ -398,7 +398,7 @@ export default function Home() {
                     Jump Fatigue Analysis
                   </li>
                 </ul>
-                <Button className="w-full bg-basketball-orange text-white hover:bg-red-500">
+                <Button className="w-full bg-orange-600 text-white hover:bg-orange-700 font-semibold">
                   Explore All Calculators
                 </Button>
               </CardContent>
@@ -442,7 +442,7 @@ export default function Home() {
                     Exercise Video Library
                   </li>
                 </ul>
-                <Button className="w-full bg-court-blue text-white hover:bg-blue-600">
+                <Button className="w-full bg-blue-600 text-white hover:bg-blue-700 font-semibold">
                   Start Training Today
                 </Button>
               </CardContent>
@@ -486,7 +486,7 @@ export default function Home() {
                     Equipment Reviews
                   </li>
                 </ul>
-                <Button className="w-full bg-success-green text-white hover:bg-green-600">
+                <Button className="w-full bg-green-600 text-white hover:bg-green-700 font-semibold">
                   Optimize Performance
                 </Button>
               </CardContent>
@@ -515,7 +515,7 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Vertical Jump Calculator</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Measure your maximum vertical leap with precision timing and technique analysis.</p>
-                <Button variant="outline" className="w-full text-basketball-orange border-basketball-orange hover:bg-basketball-orange hover:text-white">
+                <Button variant="outline" className="w-full text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white font-semibold">
                   Calculate Vertical
                 </Button>
               </CardContent>
@@ -532,7 +532,7 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Standing Reach Calculator</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Determine your optimal standing reach based on height, wingspan, and flexibility.</p>
-                <Button variant="outline" className="w-full text-court-blue border-court-blue hover:bg-court-blue hover:text-white">
+                <Button variant="outline" className="w-full text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white font-semibold">
                   Measure Reach
                 </Button>
               </CardContent>

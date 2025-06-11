@@ -25,9 +25,9 @@
   --radius: 0.5rem;
   
   /* Custom basketball theme colors */
-  --basketball-orange: hsl(15, 100%, 60%);
-  --court-blue: hsl(217, 77%, 54%);
-  --success-green: hsl(149, 80%, 40%);
+  --basketball-orange: hsl(20, 95%, 55%);
+  --court-blue: hsl(217, 85%, 50%);
+  --success-green: hsl(149, 75%, 45%);
 }
 
 .dark {

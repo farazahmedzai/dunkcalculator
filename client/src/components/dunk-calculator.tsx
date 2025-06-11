@@ -275,7 +275,7 @@ export default function DunkCalculator({ onCalculate }: DunkCalculatorProps) {
             <Button
               type="submit"
               disabled={isCalculating}
-              className="w-full bg-basketball-orange text-white py-4 rounded-lg font-semibold text-lg hover:bg-red-500 transition-colors transform hover:scale-105"
+              className="w-full bg-orange-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-orange-700 transition-colors transform hover:scale-105"
               size="lg"
             >
               {isCalculating ? (
