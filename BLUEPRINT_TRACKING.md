@@ -11,12 +11,35 @@
 - [x] Development environment configured
 - [x] Basic project structure established
 
-### Current Homepage (/dunk-calculator/)
-- [x] Basic dunk calculator functionality
-- [x] Physics calculations (vertical jump, hang time, power)
-- [x] Interactive visualization with canvas
-- [x] Basic FAQ section
-- [x] Responsive design foundation
+### Homepage Redesign (/dunk-calculator/) - BLUEPRINT COMPLIANT
+- [x] **Complete H-tag structure** per blueprint:
+  - [x] H1 Dunk Calculator – See Exactly What You Need to Fly
+  - [x] H2 Instant Results, Visualized
+  - [x] H2 What Influences Dunking Ability?
+    - [x] H3 Height & Standing Reach
+    - [x] H3 Vertical Jump – Standing vs. Approach
+    - [x] H3 Hand Size & Ball Control
+    - [x] H3 Power-to-Weight Ratio
+    - [x] H3 Technique & Timing
+  - [x] H2 Ready to Close the Gap? (3 pillar hub cards)
+  - [x] H2 Advanced Tools for Serious Jumpers (6 calculator links)
+  - [x] H2 Real-World Case Studies & FAQs
+
+### Enhanced Calculator Features
+- [x] **Advanced input options:**
+  - [x] Body weight (optional for more accurate power calculations)
+  - [x] Jump type selection (standing vs. running approach)
+  - [x] Hand size assessment (small/average/large)
+  - [x] Basketball experience level (beginner/intermediate/advanced)
+- [x] **Improved calculation accuracy:**
+  - [x] Running approach bonus (+8 inches average)
+  - [x] Hand size modifiers for ball control
+  - [x] Experience-based technique adjustments
+  - [x] Enhanced assessment messaging with context
+- [x] **Physics calculations** (vertical jump, hang time, power)
+- [x] **Interactive visualization** with canvas
+- [x] **Comprehensive FAQ section**
+- [x] **Responsive design** optimized for all devices
 
 ## 🔄 IN PROGRESS
 

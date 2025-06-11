@@ -12,10 +12,44 @@ interface CalculatorInputs {
 }
 
 export function calculateDunkRequirements(inputs: CalculatorInputs): CalculationResults {
-  const { height, standingReach, rimHeight, clearance } = inputs;
+  const { 
+    height, 
+    standingReach, 
+    rimHeight, 
+    clearance, 
+    bodyWeight,
+    jumpType = "standing",
+    handSize = "average",
+    experience = "beginner"
+  } = inputs;
 
-  // Calculate required vertical jump
-  const requiredVertical = Math.max(0, (rimHeight + clearance) - standingReach);
+  // Calculate base required vertical jump
+  let baseRequiredVertical = Math.max(0, (rimHeight + clearance) - standingReach);
+
+  // Apply jump type modifier
+  if (jumpType === "approach") {
+    // Running approach typically adds 6-12 inches
+    const approachBonus = 8; // Average bonus for running approach
+    baseRequiredVertical = Math.max(0, baseRequiredVertical - approachBonus);
+  }
+
+  // Apply hand size modifier to clearance requirement
+  let handSizeModifier = 0;
+  if (handSize === "small") {
+    handSizeModifier = 2; // Need extra clearance for ball control
+  } else if (handSize === "large") {
+    handSizeModifier = -1; // Can dunk with less clearance
+  }
+
+  // Apply experience modifier
+  let experienceModifier = 0;
+  if (experience === "intermediate") {
+    experienceModifier = -1; // Better technique
+  } else if (experience === "advanced") {
+    experienceModifier = -2; // Excellent technique
+  }
+
+  const requiredVertical = Math.max(0, baseRequiredVertical + handSizeModifier + experienceModifier);
 
   // Calculate hang time using physics formula
   // h = (1/2)gt² where g = 32.174 ft/s² (gravity in imperial)
@@ -28,30 +62,54 @@ export function calculateDunkRequirements(inputs: CalculatorInputs): Calculation
   const hangTime = requiredVertical > 0 ? 2 * Math.sqrt(2 * jumpHeightFeet / gravity) : 0;
 
   // Calculate power requirements
-  // Approximate body weight based on height (rough estimate)
-  const estimatedWeight = Math.max(120, (height - 60) * 3 + 150); // pounds
+  // Use provided body weight or estimate from height
+  const actualWeight = bodyWeight || Math.max(120, (height - 60) * 3 + 150);
   
   // Power = Force × Distance / Time
   // Force = Weight (in this simplified model)
   // Convert to watts: 1 hp = 746 watts, 1 ft-lb/s = 1.356 watts
-  const powerFootPounds = estimatedWeight * jumpHeightFeet / (hangTime / 2);
+  const powerFootPounds = actualWeight * jumpHeightFeet / Math.max(hangTime / 2, 0.1);
   const power = Math.round(powerFootPounds * 1.356);
 
-  // Generate assessment
+  // Generate enhanced assessment
   let assessment: string;
   let canDunk = false;
 
   if (requiredVertical <= 0) {
-    assessment = "Congratulations! You can already dunk with your current measurements. Your standing reach is sufficient to clear the rim with the desired clearance.";
+    assessment = `Congratulations! You can already dunk with your current measurements${jumpType === "approach" ? " using a running approach" : ""}. Your standing reach is sufficient to clear the rim with the desired clearance.`;
     canDunk = true;
-  } else if (requiredVertical <= 6) {
-    assessment = `You need to improve your vertical jump by ${requiredVertical.toFixed(1)} inches. This is very achievable with dedicated training over 2-4 weeks!`;
-  } else if (requiredVertical <= 12) {
-    assessment = `You need to improve your vertical jump by ${requiredVertical.toFixed(1)} inches. This is achievable with consistent training over 2-4 months.`;
-  } else if (requiredVertical <= 24) {
-    assessment = `You need to improve your vertical jump by ${requiredVertical.toFixed(1)} inches. This will require dedicated training over 6-12 months with proper programming.`;
   } else {
-    assessment = `You need to improve your vertical jump by ${requiredVertical.toFixed(1)} inches. This is a challenging but not impossible goal that will require 12+ months of specialized training.`;
+    let timeframe = "";
+    let difficulty = "";
+    
+    if (requiredVertical <= 6) {
+      timeframe = "2-4 weeks";
+      difficulty = "very achievable";
+    } else if (requiredVertical <= 12) {
+      timeframe = "2-4 months";
+      difficulty = "achievable";
+    } else if (requiredVertical <= 24) {
+      timeframe = "6-12 months";
+      difficulty = "challenging but realistic";
+    } else {
+      timeframe = "12+ months";
+      difficulty = "very challenging";
+    }
+
+    assessment = `You need to improve your vertical jump by ${requiredVertical.toFixed(1)} inches${jumpType === "approach" ? " (with running approach)" : ""}. This is ${difficulty} with dedicated training over ${timeframe}.`;
+    
+    // Add modifiers context
+    if (handSize === "small") {
+      assessment += " Your smaller hands require extra clearance for ball control.";
+    } else if (handSize === "large") {
+      assessment += " Your larger hands provide an advantage for ball control.";
+    }
+    
+    if (experience === "advanced") {
+      assessment += " Your advanced technique gives you a significant advantage.";
+    } else if (experience === "beginner") {
+      assessment += " Focus on improving your jumping technique alongside strength training.";
+    }
   }
 
   return {
