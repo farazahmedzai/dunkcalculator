@@ -522,9 +522,11 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Vertical Jump Calculator</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Measure your maximum vertical leap with precision timing and technique analysis.</p>
-                <Button variant="outline" className="w-full text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white font-semibold">
-                  Calculate Vertical
-                </Button>
+                <Link href="/calculators/vertical-jump-calculator">
+                  <Button variant="outline" className="w-full text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white font-semibold">
+                    Calculate Vertical
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -539,9 +541,11 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Standing Reach Calculator</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Determine your optimal standing reach based on height, wingspan, and flexibility.</p>
-                <Button variant="outline" className="w-full text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white font-semibold">
-                  Measure Reach
-                </Button>
+                <Link href="/calculators/standing-reach-calculator">
+                  <Button variant="outline" className="w-full text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white font-semibold">
+                    Measure Reach
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -556,9 +560,11 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Approach vs Standing</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Compare your running approach jump to your standing vertical leap performance.</p>
-                <Button variant="outline" className="w-full text-green-600 border-green-600 hover:bg-green-600 hover:text-white font-semibold">
-                  Compare Jumps
-                </Button>
+                <Link href="/calculators/approach-vs-standing-jump-calculator">
+                  <Button variant="outline" className="w-full text-green-600 border-green-600 hover:bg-green-600 hover:text-white font-semibold">
+                    Compare Jumps
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -573,9 +579,11 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Jump Fatigue Calculator</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Analyze how your vertical decreases with repeated jumps and optimize rest periods.</p>
-                <Button variant="outline" className="w-full text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white font-semibold">
-                  Measure Fatigue
-                </Button>
+                <Link href="/calculators/jump-fatigue-calculator">
+                  <Button variant="outline" className="w-full text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white font-semibold">
+                    Measure Fatigue
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -590,9 +598,11 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Max Potential Calculator</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Estimate your maximum achievable vertical jump based on body composition and training.</p>
-                <Button variant="outline" className="w-full text-purple-500 border-purple-500 hover:bg-purple-500 hover:text-white">
-                  Find Max Potential
-                </Button>
+                <Link href="/calculators/max-potential-jump-calculator">
+                  <Button variant="outline" className="w-full text-purple-500 border-purple-500 hover:bg-purple-500 hover:text-white">
+                    Find Max Potential
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -607,9 +617,11 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Ideal Body Weight</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Calculate your optimal weight for maximum jumping performance and power output.</p>
-                <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-500 hover:text-white">
-                  Optimize Weight
-                </Button>
+                <Link href="/calculators/ideal-body-weight-jump-calculator">
+                  <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-500 hover:text-white">
+                    Optimize Weight
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
