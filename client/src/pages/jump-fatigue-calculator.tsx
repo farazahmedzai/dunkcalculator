@@ -58,7 +58,6 @@ export default function JumpFatigueCalculator() {
       const performanceDrop = ((data.restingJump - data.fatigueJump) / data.restingJump) * 100;
       const fatigueIndex = Math.min(100, Math.max(0, performanceDrop));
 
-      // Determine fatigue level
       let fatigueLevel = "";
       if (fatigueIndex < 5) fatigueLevel = "Minimal Fatigue - Excellent recovery";
       else if (fatigueIndex < 10) fatigueLevel = "Low Fatigue - Good conditioning";
@@ -66,24 +65,18 @@ export default function JumpFatigueCalculator() {
       else if (fatigueIndex < 25) fatigueLevel = "High Fatigue - Needs attention";
       else fatigueLevel = "Severe Fatigue - Recovery required";
 
-      // Calculate recovery time based on multiple factors
-      let baseRecovery = fatigueIndex * 0.8; // Base minutes
-      
-      // Adjust for activity intensity
+      let baseRecovery = fatigueIndex * 0.8;
       const intensityModifiers = { low: 0.7, moderate: 1.0, high: 1.3, maximal: 1.6 };
       baseRecovery *= intensityModifiers[data.intensityLevel];
 
-      // Adjust for duration
       if (data.durationMinutes > 120) baseRecovery *= 1.2;
       else if (data.durationMinutes < 30) baseRecovery *= 0.8;
 
-      // Adjust for fitness level
       const fitnessModifiers = { beginner: 1.4, intermediate: 1.0, advanced: 0.8, elite: 0.6 };
       baseRecovery *= fitnessModifiers[data.fitnessLevel || "intermediate"];
 
       const recoveryTime = Math.round(baseRecovery);
 
-      // Determine fatigue type
       let fatigueType = "";
       if (data.durationMinutes < 45 && data.intensityLevel === "maximal") {
         fatigueType = "Neuromuscular Fatigue - High intensity, short duration";
@@ -95,43 +88,40 @@ export default function JumpFatigueCalculator() {
         fatigueType = "Mild Fatigue - Normal training response";
       }
 
-      // Generate recommendations
       const recommendations = [];
       if (fatigueIndex < 10) {
-        recommendations.push("Your fatigue resistance is excellent");
-        recommendations.push("Consider increasing training intensity gradually");
-        recommendations.push("Maintain current recovery protocols");
+        recommendations.push("Excellent fatigue resistance - maintain current training load");
+        recommendations.push("Consider increasing training intensity for continued adaptation");
+        recommendations.push("Focus on skill development during low fatigue periods");
       } else if (fatigueIndex < 20) {
-        recommendations.push("Normal fatigue levels for this activity");
-        recommendations.push("Focus on active recovery between sets/games");
-        recommendations.push("Ensure adequate hydration and nutrition");
+        recommendations.push("Normal fatigue response - monitor recovery closely");
+        recommendations.push("Ensure adequate rest between high-intensity sessions");
+        recommendations.push("Consider light active recovery activities");
+      } else if (fatigueIndex < 30) {
+        recommendations.push("Elevated fatigue - reduce training volume temporarily");
+        recommendations.push("Focus on recovery protocols (sleep, nutrition, hydration)");
+        recommendations.push("Incorporate more rest days into training schedule");
       } else {
-        recommendations.push("High fatigue levels indicate need for better conditioning");
-        recommendations.push("Extend rest periods between intense activities");
-        recommendations.push("Consider reducing training volume temporarily");
+        recommendations.push("High fatigue levels - immediate recovery focus needed");
+        recommendations.push("Consider 24-48 hour complete rest period");
+        recommendations.push("Evaluate training program for overreaching signs");
       }
 
-      // Training adjustments
       const trainingAdjustments = [];
       if (fatigueIndex > 15) {
-        trainingAdjustments.push("Increase aerobic base training");
-        trainingAdjustments.push("Add interval training for power endurance");
-        trainingAdjustments.push("Focus on proper warm-up and cool-down");
-      }
-      if (data.intensityLevel === "maximal" && fatigueIndex > 20) {
-        trainingAdjustments.push("Reduce maximal intensity session frequency");
-        trainingAdjustments.push("Add more recovery days between intense sessions");
-      }
-      if (recoveryTime > 30) {
-        trainingAdjustments.push("Implement active recovery protocols");
-        trainingAdjustments.push("Consider massage or foam rolling");
+        trainingAdjustments.push("Reduce plyometric volume by 30-50%");
+        trainingAdjustments.push("Increase rest periods between sets");
+        trainingAdjustments.push("Focus on technique rather than intensity");
+      } else {
+        trainingAdjustments.push("Current training load appears appropriate");
+        trainingAdjustments.push("Can maintain or slightly increase volume");
+        trainingAdjustments.push("Good recovery between sessions");
       }
 
-      // Next test recommendation
       let nextTestTime = "";
-      if (fatigueIndex < 10) nextTestTime = "Retest in 2-3 weeks";
-      else if (fatigueIndex < 20) nextTestTime = "Retest in 1-2 weeks";
-      else nextTestTime = "Retest in 3-5 days after recovery";
+      if (fatigueIndex < 10) nextTestTime = "48-72 hours for progress monitoring";
+      else if (fatigueIndex < 20) nextTestTime = "24-48 hours to track recovery";
+      else nextTestTime = "12-24 hours to ensure adequate recovery";
 
       setResults({
         fatigueIndex: Math.round(fatigueIndex * 10) / 10,
@@ -145,12 +135,11 @@ export default function JumpFatigueCalculator() {
       });
       
       setIsCalculating(false);
-    }, 900);
+    }, 700);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50">
-      {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
@@ -164,8 +153,8 @@ export default function JumpFatigueCalculator() {
               <Link href="/" className="text-gray-600 hover:text-red-600 transition-colors">
                 Dunk Calculator
               </Link>
-              <Link href="/vertical-jump-training" className="text-gray-600 hover:text-red-600 transition-colors">
-                Training Programs
+              <Link href="/calculators/vertical-jump-calculator" className="text-gray-600 hover:text-red-600 transition-colors">
+                Vertical Jump Calculator
               </Link>
             </nav>
           </div>
@@ -173,46 +162,45 @@ export default function JumpFatigueCalculator() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-red-100 rounded-full">
               <Zap className="w-8 h-8 text-red-600" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Jump Fatigue Calculator
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Measure how fatigue affects your jumping performance and get personalized recovery recommendations
+            Track how fatigue affects your jumping performance and get recovery recommendations for optimal training adaptation.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Calculator Form */}
+        <div className="grid lg:grid-cols-2 gap-8">
           <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
             <CardHeader>
-              <CardTitle className="text-2xl text-gray-900">Fatigue Analysis</CardTitle>
+              <CardTitle className="flex items-center space-x-2">
+                <TrendingDown className="w-5 h-5 text-red-600" />
+                <span>Fatigue Analysis</span>
+              </CardTitle>
               <CardDescription>
-                Compare your rested vs fatigued jump performance
+                Compare your rested vs fatigued jump performance to analyze fatigue impact and recovery needs.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(calculateFatigue)} className="space-y-6">
-                  {/* Jump Measurements */}
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="restingJump"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Rested Jump Height (inches)</FormLabel>
+                          <FormLabel>Rested Jump (inches)</FormLabel>
                           <FormControl>
                             <Input
                               type="number"
-                              step="0.1"
-                              placeholder="e.g., 28.5"
+                              placeholder="28"
                               {...field}
                               onChange={(e) => field.onChange(parseFloat(e.target.value))}
                             />
@@ -226,12 +214,11 @@ export default function JumpFatigueCalculator() {
                       name="fatigueJump"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Fatigued Jump Height (inches)</FormLabel>
+                          <FormLabel>Fatigued Jump (inches)</FormLabel>
                           <FormControl>
                             <Input
                               type="number"
-                              step="0.1"
-                              placeholder="e.g., 24.0"
+                              placeholder="24"
                               {...field}
                               onChange={(e) => field.onChange(parseFloat(e.target.value))}
                             />
@@ -242,8 +229,7 @@ export default function JumpFatigueCalculator() {
                     />
                   </div>
 
-                  {/* Activity Details */}
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="activityType"
@@ -276,9 +262,9 @@ export default function JumpFatigueCalculator() {
                           <FormControl>
                             <Input
                               type="number"
-                              placeholder="e.g., 90"
+                              placeholder="90"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value))}
+                              onChange={(e) => field.onChange(parseFloat(e.target.value))}
                             />
                           </FormControl>
                           <FormMessage />
@@ -287,7 +273,7 @@ export default function JumpFatigueCalculator() {
                     />
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="intensityLevel"
@@ -316,33 +302,11 @@ export default function JumpFatigueCalculator() {
                       name="restTime"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Rest Before Test (minutes)</FormLabel>
+                          <FormLabel>Rest Before Test (min)</FormLabel>
                           <FormControl>
                             <Input
                               type="number"
-                              placeholder="e.g., 5"
-                              {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value))}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  {/* Optional Details */}
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="bodyWeight"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Body Weight (lbs)</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="e.g., 170"
+                              placeholder="5"
                               {...field}
                               onChange={(e) => field.onChange(parseFloat(e.target.value))}
                             />
@@ -351,186 +315,101 @@ export default function JumpFatigueCalculator() {
                         </FormItem>
                       )}
                     />
-                    <FormField
-                      control={form.control}
-                      name="age"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Age</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="e.g., 20"
-                              {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value))}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="fitnessLevel"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Fitness Level</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select level" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="beginner">Beginner</SelectItem>
-                              <SelectItem value="intermediate">Intermediate</SelectItem>
-                              <SelectItem value="advanced">Advanced</SelectItem>
-                              <SelectItem value="elite">Elite</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                   </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full bg-red-600 hover:bg-red-700 text-white py-3"
+                  <FormField
+                    control={form.control}
+                    name="fitnessLevel"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Fitness Level</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select fitness level" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="beginner">Beginner</SelectItem>
+                            <SelectItem value="intermediate">Intermediate</SelectItem>
+                            <SelectItem value="advanced">Advanced</SelectItem>
+                            <SelectItem value="elite">Elite</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button 
+                    type="submit" 
                     disabled={isCalculating}
+                    className="w-full bg-red-600 hover:bg-red-700 text-white h-12"
                   >
-                    {isCalculating ? "Analyzing..." : "Analyze Fatigue"}
+                    {isCalculating ? "Analyzing Fatigue..." : "Calculate Fatigue Impact"}
                   </Button>
                 </form>
               </Form>
             </CardContent>
           </Card>
 
-          {/* Results */}
           {results && (
-            <div className="space-y-6">
-              {/* Fatigue Index */}
-              <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-red-700">
-                    <TrendingDown className="w-5 h-5 mr-2" />
-                    Fatigue Analysis
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-red-600 mb-2">
-                      {results.fatigueIndex}%
-                    </div>
-                    <div className="text-lg text-gray-700 mb-4">
-                      {results.fatigueLevel}
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      Performance Drop: {results.performanceDrop}%
-                    </div>
+            <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-xl">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                  <span>Fatigue Analysis Results</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-4 bg-red-50 rounded-lg">
+                    <div className="text-2xl font-bold text-red-600">{results.fatigueIndex}%</div>
+                    <div className="text-sm text-gray-600">Fatigue Index</div>
                   </div>
-                  
-                  <div className="bg-red-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-red-800 mb-2">Fatigue Type</h4>
-                    <p className="text-sm text-red-700">{results.fatigueType}</p>
+                  <div className="text-center p-4 bg-orange-50 rounded-lg">
+                    <div className="text-2xl font-bold text-orange-600">{results.recoveryTime}min</div>
+                    <div className="text-sm text-gray-600">Recovery Time</div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
 
-              {/* Recovery Time */}
-              <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-orange-700">
-                    <AlertTriangle className="w-5 h-5 mr-2" />
-                    Recovery Guidelines
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-orange-600 mb-2">
-                      {results.recoveryTime} minutes
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      Estimated recovery time to baseline
-                    </div>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">Fatigue Level</h4>
+                    <p className="text-gray-700">{results.fatigueLevel}</p>
                   </div>
-                  
-                  <div className="bg-orange-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-orange-800 mb-2">Next Test</h4>
-                    <p className="text-sm text-orange-700">{results.nextTestTime}</p>
-                  </div>
-                </CardContent>
-              </Card>
 
-              {/* Recommendations */}
-              <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-gray-800">Recommendations</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-gray-800 mb-2">Immediate Actions</h4>
-                      <ul className="space-y-2">
-                        {results.recommendations.map((rec, index) => (
-                          <li key={index} className="flex items-start">
-                            <div className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span className="text-sm text-gray-700">{rec}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {results.trainingAdjustments.length > 0 && (
-                      <div>
-                        <h4 className="font-semibold text-gray-800 mb-2">Training Adjustments</h4>
-                        <ul className="space-y-2">
-                          {results.trainingAdjustments.map((adj, index) => (
-                            <li key={index} className="flex items-start">
-                              <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                              <span className="text-sm text-gray-700">{adj}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">Fatigue Type</h4>
+                    <p className="text-gray-700">{results.fatigueType}</p>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">Recommendations</h4>
+                    <ul className="list-disc list-inside space-y-1 text-gray-700">
+                      {results.recommendations.map((rec, index) => (
+                        <li key={index}>{rec}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">Training Adjustments</h4>
+                    <ul className="list-disc list-inside space-y-1 text-gray-700">
+                      {results.trainingAdjustments.map((adj, index) => (
+                        <li key={index}>{adj}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-blue-900 mb-2">Next Test</h4>
+                    <p className="text-blue-800">{results.nextTestTime}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           )}
-        </div>
-
-        {/* How to Use */}
-        <div className="mt-16">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-2xl text-gray-900">How to Use This Calculator</CardTitle>
-            </CardHeader>
-            <CardContent className="prose prose-gray max-w-none">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">Testing Protocol</h3>
-                  <ol className="space-y-2 text-sm text-gray-600">
-                    <li>1. Measure your best vertical jump when fully rested</li>
-                    <li>2. Complete your training/game activity</li>
-                    <li>3. Rest for 5-10 minutes to clear acute fatigue</li>
-                    <li>4. Perform 3 maximum vertical jumps and record the best</li>
-                    <li>5. Enter both measurements into the calculator</li>
-                  </ol>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">Interpreting Results</h3>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li>• <strong>0-5%:</strong> Excellent fatigue resistance</li>
-                    <li>• <strong>5-15%:</strong> Normal training response</li>
-                    <li>• <strong>15-25%:</strong> High fatigue, adjust training</li>
-                    <li>• <strong>25%+:</strong> Severe fatigue, prioritize recovery</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>
