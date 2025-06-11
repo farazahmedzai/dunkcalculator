@@ -549,7 +549,7 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Approach vs Standing</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Compare your running approach jump to your standing vertical leap performance.</p>
-                <Button variant="outline" className="w-full text-success-green border-success-green hover:bg-success-green hover:text-white">
+                <Button variant="outline" className="w-full text-green-600 border-green-600 hover:bg-green-600 hover:text-white font-semibold">
                   Compare Jumps
                 </Button>
               </CardContent>
@@ -566,7 +566,7 @@ export default function Home() {
                   <h3 className="text-lg font-semibold">Jump Fatigue Calculator</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-4">Analyze how your vertical decreases with repeated jumps and optimize rest periods.</p>
-                <Button variant="outline" className="w-full text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white">
+                <Button variant="outline" className="w-full text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white font-semibold">
                   Measure Fatigue
                 </Button>
               </CardContent>
