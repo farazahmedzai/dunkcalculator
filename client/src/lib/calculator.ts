@@ -5,6 +5,10 @@ interface CalculatorInputs {
   standingReach: number;
   rimHeight: number;
   clearance: number;
+  bodyWeight?: number;
+  jumpType?: "standing" | "approach";
+  handSize?: "small" | "average" | "large";
+  experience?: "beginner" | "intermediate" | "advanced";
 }
 
 export function calculateDunkRequirements(inputs: CalculatorInputs): CalculationResults {

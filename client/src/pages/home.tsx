@@ -47,16 +47,22 @@ export default function Home() {
                 Calculator
               </button>
               <button
-                onClick={() => scrollToSection('how-it-works')}
+                onClick={() => scrollToSection('what-influences')}
                 className="text-gray-700 hover:text-basketball-orange transition-colors"
               >
-                How It Works
+                Factors
               </button>
               <button
-                onClick={() => scrollToSection('physics')}
+                onClick={() => scrollToSection('close-the-gap')}
                 className="text-gray-700 hover:text-basketball-orange transition-colors"
               >
-                Physics
+                Training
+              </button>
+              <button
+                onClick={() => scrollToSection('advanced-tools')}
+                className="text-gray-700 hover:text-basketball-orange transition-colors"
+              >
+                Tools
               </button>
               <button
                 onClick={() => scrollToSection('faq')}
@@ -109,50 +115,128 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-16 bg-gray-50">
+      {/* What Influences Dunking Ability Section */}
+      <section id="what-influences" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How the Dunk Calculator Works</h2>
-            <p className="text-xl text-gray-600">Three simple steps to calculate your dunking requirements</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Influences Dunking Ability?</h2>
+            <p className="text-xl text-gray-600">Understanding the key factors that determine your dunking potential</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-basketball-orange text-white rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold">1</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Enter Standing Reach & Height</h3>
-                <p className="text-gray-600">
-                  Measure your height and standing reach. Standing reach is how high you can reach with your arm fully extended while standing flat-footed.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="grid lg:grid-cols-2 gap-12">
+            <div className="space-y-8">
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <div className="w-10 h-10 bg-basketball-orange/10 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-basketball-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" />
+                      </svg>
+                    </div>
+                    Height & Standing Reach
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Your height determines your baseline advantage, but standing reach is even more critical. Players with longer arms relative to their height have a significant advantage.
+                  </p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <p className="text-sm text-gray-700"><strong>Pro Tip:</strong> Standing reach is typically 1.3x your height. Elite players often have reaches 1.35x or higher.</p>
+                  </div>
+                </CardContent>
+              </Card>
 
-            <Card className="text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-court-blue text-white rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold">2</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Set Rim Height & Clearance</h3>
-                <p className="text-gray-600">
-                  Choose your target rim height and desired clearance above the rim. More clearance allows for more aggressive dunking styles.
-                </p>
-              </CardContent>
-            </Card>
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <div className="w-10 h-10 bg-court-blue/10 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-court-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    Vertical Jump – Standing vs. Approach
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Most players jump 6-12 inches higher with a running approach compared to standing. The additional momentum and proper footwork create explosive take-offs.
+                  </p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <p className="text-sm text-gray-700"><strong>Key Insight:</strong> Master both one-foot and two-foot takeoffs for maximum versatility.</p>
+                  </div>
+                </CardContent>
+              </Card>
 
-            <Card className="text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-success-green text-white rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold">3</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Get Vertical, Hang-Time & Energy</h3>
-                <p className="text-gray-600">
-                  Instantly see your required vertical jump, hang-time in the air, and power output needed to achieve your dunking goals.
-                </p>
-              </CardContent>
-            </Card>
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <div className="w-10 h-10 bg-success-green/10 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-success-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    Hand Size & Ball Control
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Larger hands make gripping and controlling the ball easier during flight. Players with smaller hands often need extra clearance or specific techniques.
+                  </p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <p className="text-sm text-gray-700"><strong>Workaround:</strong> Develop stronger grip strength and practice alternative dunking styles.</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="space-y-8">
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                      </svg>
+                    </div>
+                    Power-to-Weight Ratio
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Your strength relative to body weight determines explosive power. Lighter, stronger athletes typically jump higher than heavier counterparts.
+                  </p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <p className="text-sm text-gray-700"><strong>Training Focus:</strong> Build explosive leg strength while maintaining optimal body composition.</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <div className="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    Technique & Timing
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Proper jumping mechanics, arm swing coordination, and take-off timing can add several inches to your effective reach height.
+                  </p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <p className="text-sm text-gray-700"><strong>Quick Gains:</strong> Master proper form before focusing on strength gains.</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-basketball-orange to-red-500 text-white">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-4">The Complete Picture</h3>
+                  <p className="mb-4">
+                    Elite dunkers excel in multiple areas simultaneously. While you can't change your height, every other factor is trainable with dedication.
+                  </p>
+                  <Button 
+                    onClick={() => scrollToSection('calculator')}
+                    className="bg-white text-basketball-orange hover:bg-gray-100"
+                  >
+                    Calculate Your Requirements
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
@@ -263,6 +347,276 @@ export default function Home() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ready to Close the Gap Section */}
+      <section id="close-the-gap" className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Close the Gap?</h2>
+            <p className="text-xl text-gray-600">Your complete pathway to dunking success</p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Pillar 1: Calculators */}
+            <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-basketball-orange">
+              <CardContent className="p-8 text-center">
+                <div className="w-20 h-20 bg-basketball-orange/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-basketball-orange/20 transition-colors">
+                  <svg className="w-10 h-10 text-basketball-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Performance Calculators</h3>
+                <p className="text-gray-600 mb-6">
+                  7 specialized calculators to measure every aspect of your jumping ability. Track progress, identify weaknesses, and optimize your training.
+                </p>
+                <ul className="text-left text-gray-600 mb-6 space-y-2">
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-basketball-orange mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Vertical Jump Calculator
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-basketball-orange mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Standing Reach Assessment
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-basketball-orange mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Approach vs Standing Jump
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-basketball-orange mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Jump Fatigue Analysis
+                  </li>
+                </ul>
+                <Button className="w-full bg-basketball-orange text-white hover:bg-red-500">
+                  Explore All Calculators
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Pillar 2: Training */}
+            <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-court-blue">
+              <CardContent className="p-8 text-center">
+                <div className="w-20 h-20 bg-court-blue/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-court-blue/20 transition-colors">
+                  <svg className="w-10 h-10 text-court-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Training Programs</h3>
+                <p className="text-gray-600 mb-6">
+                  Comprehensive training programs designed by experts. From beginner bodyweight routines to advanced plyometric protocols.
+                </p>
+                <ul className="text-left text-gray-600 mb-6 space-y-2">
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-court-blue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    12-Week Gym Program
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-court-blue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    At-Home Bodyweight Plan
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-court-blue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Advanced Plyometrics
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-court-blue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Exercise Video Library
+                  </li>
+                </ul>
+                <Button className="w-full bg-court-blue text-white hover:bg-blue-600">
+                  Start Training Today
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Pillar 3: Performance */}
+            <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-success-green">
+              <CardContent className="p-8 text-center">
+                <div className="w-20 h-20 bg-success-green/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-success-green/20 transition-colors">
+                  <svg className="w-10 h-10 text-success-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Athletic Performance</h3>
+                <p className="text-gray-600 mb-6">
+                  Science-backed performance optimization. Nutrition, recovery, biomechanics, and gear recommendations from sports scientists.
+                </p>
+                <ul className="text-left text-gray-600 mb-6 space-y-2">
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-success-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Jumping Biomechanics
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-success-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Nutrition for Explosiveness
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-success-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Injury Prevention
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-success-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Equipment Reviews
+                  </li>
+                </ul>
+                <Button className="w-full bg-success-green text-white hover:bg-green-600">
+                  Optimize Performance
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Advanced Tools Section */}
+      <section id="advanced-tools" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Advanced Tools for Serious Jumpers</h2>
+            <p className="text-xl text-gray-600">Specialized calculators for comprehensive performance analysis</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-basketball-orange">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-basketball-orange/10 rounded-lg flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-basketball-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold">Vertical Jump Calculator</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Measure your maximum vertical leap with precision timing and technique analysis.</p>
+                <Button variant="outline" className="w-full text-basketball-orange border-basketball-orange hover:bg-basketball-orange hover:text-white">
+                  Calculate Vertical
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-court-blue">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-court-blue/10 rounded-lg flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-court-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold">Standing Reach Calculator</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Determine your optimal standing reach based on height, wingspan, and flexibility.</p>
+                <Button variant="outline" className="w-full text-court-blue border-court-blue hover:bg-court-blue hover:text-white">
+                  Measure Reach
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-success-green">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-success-green/10 rounded-lg flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-success-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold">Approach vs Standing</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Compare your running approach jump to your standing vertical leap performance.</p>
+                <Button variant="outline" className="w-full text-success-green border-success-green hover:bg-success-green hover:text-white">
+                  Compare Jumps
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-orange-500">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold">Jump Fatigue Calculator</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Analyze how your vertical decreases with repeated jumps and optimize rest periods.</p>
+                <Button variant="outline" className="w-full text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white">
+                  Measure Fatigue
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-purple-500">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold">Max Potential Calculator</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Estimate your maximum achievable vertical jump based on body composition and training.</p>
+                <Button variant="outline" className="w-full text-purple-500 border-purple-500 hover:bg-purple-500 hover:text-white">
+                  Find Max Potential
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-red-500">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold">Ideal Body Weight</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Calculate your optimal weight for maximum jumping performance and power output.</p>
+                <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-500 hover:text-white">
+                  Optimize Weight
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <Card className="bg-gradient-to-r from-basketball-orange to-red-500 text-white inline-block">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4">Professional Analysis Package</h3>
+                <p className="mb-4">Get detailed reports from all calculators with personalized training recommendations.</p>
+                <Button className="bg-white text-basketball-orange hover:bg-gray-100">
+                  Unlock Full Analysis
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

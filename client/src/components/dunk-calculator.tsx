@@ -15,6 +15,10 @@ const calculatorSchema = z.object({
   standingReach: z.number().min(60, "Standing reach must be at least 60 inches").max(120, "Standing reach must be less than 120 inches"),
   rimHeight: z.number().min(84, "Rim height must be at least 84 inches").max(120, "Rim height must be less than 120 inches"),
   clearance: z.number().min(2, "Clearance must be at least 2 inches").max(12, "Clearance must be less than 12 inches"),
+  bodyWeight: z.number().min(80, "Body weight must be at least 80 lbs").max(400, "Body weight must be less than 400 lbs").optional(),
+  jumpType: z.enum(["standing", "approach"]).default("standing"),
+  handSize: z.enum(["small", "average", "large"]).default("average"),
+  experience: z.enum(["beginner", "intermediate", "advanced"]).default("beginner"),
 });
 
 type CalculatorFormData = z.infer<typeof calculatorSchema>;
@@ -33,6 +37,10 @@ export default function DunkCalculator({ onCalculate }: DunkCalculatorProps) {
       standingReach: 0,
       rimHeight: 120,
       clearance: 6,
+      bodyWeight: 0,
+      jumpType: "standing",
+      handSize: "average",
+      experience: "beginner",
     },
   });
 
@@ -163,6 +171,101 @@ export default function DunkCalculator({ onCalculate }: DunkCalculatorProps) {
                         className="border-2 border-gray-300 focus:border-basketball-orange"
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="bodyWeight"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Body Weight (lbs) - Optional</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        step="1"
+                        min="80"
+                        max="400"
+                        placeholder="Enter your weight"
+                        {...field}
+                        onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                        className="border-2 border-gray-300 focus:border-basketball-orange"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="jumpType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Jump Type</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue="standing">
+                      <FormControl>
+                        <SelectTrigger className="border-2 border-gray-300 focus:border-basketball-orange">
+                          <SelectValue placeholder="Select jump type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="standing">Standing Jump</SelectItem>
+                        <SelectItem value="approach">Running Approach</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="handSize"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Hand Size</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue="average">
+                      <FormControl>
+                        <SelectTrigger className="border-2 border-gray-300 focus:border-basketball-orange">
+                          <SelectValue placeholder="Select hand size" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="small">Small (under 8.5 inches)</SelectItem>
+                        <SelectItem value="average">Average (8.5 - 9.5 inches)</SelectItem>
+                        <SelectItem value="large">Large (over 9.5 inches)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="experience"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Basketball Experience</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue="beginner">
+                      <FormControl>
+                        <SelectTrigger className="border-2 border-gray-300 focus:border-basketball-orange">
+                          <SelectValue placeholder="Select experience level" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="beginner">Beginner (0-2 years)</SelectItem>
+                        <SelectItem value="intermediate">Intermediate (3-5 years)</SelectItem>
+                        <SelectItem value="advanced">Advanced (6+ years)</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
