@@ -98,29 +98,37 @@ export default function StandingReachCalculator() {
       // Generate recommendations
       const recommendations = [];
       if (reachToHeightRatio < 1.30) {
-        recommendations.push("Focus on shoulder flexibility and mobility exercises");
-        recommendations.push("Work on improving posture and spinal alignment");
-        recommendations.push("Consider your technique when measuring");
-      } else if (reachToHeightRatio > 1.35) {
-        recommendations.push("You have a natural advantage for basketball");
-        recommendations.push("Leverage your reach in defensive positioning");
-        recommendations.push("Your blocking and rebounding potential is high");
+        recommendations.push("Consider flexibility exercises to improve shoulder mobility");
+        recommendations.push("Work on posture and core strength for better reach extension");
+        recommendations.push("Focus on overhead exercises to maximize your natural reach");
+      } else if (reachToHeightRatio < 1.35) {
+        recommendations.push("Your reach is above average - leverage this advantage");
+        recommendations.push("Practice overhead shooting and rebounding techniques");
+        recommendations.push("Maintain flexibility to preserve your reach advantage");
       } else {
-        recommendations.push("You have a typical reach-to-height ratio");
-        recommendations.push("Focus on maximizing other athletic attributes");
-        recommendations.push("Technique and training matter more than reach");
+        recommendations.push("Excellent reach advantage - maximize this genetic gift");
+        recommendations.push("Focus on timing and positioning rather than just jumping");
+        recommendations.push("Consider positions that utilize your superior reach");
       }
 
-      // Assess dunking potential
+      // Determine dunk potential
       let dungPotential = "";
-      const rimHeight = 120; // 10 feet = 120 inches
-      const neededVertical = rimHeight - estimatedReach;
+      const rimHeight = 120; // Standard 10-foot rim
+      const minClearance = 6; // Minimum clearance needed
+      const requiredReach = rimHeight + minClearance;
       
-      if (neededVertical <= 0) dungPotential = "You can touch the rim without jumping!";
-      else if (neededVertical <= 12) dungPotential = "Excellent dunking potential - relatively low jump needed";
-      else if (neededVertical <= 24) dungPotential = "Good dunking potential with moderate training";
-      else if (neededVertical <= 36) dungPotential = "Dunking possible but requires significant vertical jump development";
-      else dungPotential = "Dunking will be very challenging - focus on other basketball skills";
+      if (estimatedReach >= requiredReach) {
+        dungPotential = "You can potentially dunk with minimal vertical jump requirement!";
+      } else {
+        const neededVertical = requiredReach - estimatedReach;
+        if (neededVertical < 12) {
+          dungPotential = `You need only ${neededVertical.toFixed(1)}" vertical jump to dunk - very achievable!`;
+        } else if (neededVertical < 24) {
+          dungPotential = `You need ${neededVertical.toFixed(1)}" vertical jump to dunk - challenging but realistic with training.`;
+        } else {
+          dungPotential = `You need ${neededVertical.toFixed(1)}" vertical jump to dunk - this will require significant athletic development.`;
+        }
+      }
 
       setResults({
         estimatedReach: Math.round(estimatedReach * 10) / 10,
