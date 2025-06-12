@@ -308,6 +308,7 @@ export default function DunkCalculator({ onCalculate }: DunkCalculatorProps) {
                 type="submit"
                 disabled={isCalculating}
                 className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-6 rounded-xl font-bold text-lg hover:from-orange-700 hover:to-red-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl disabled:from-gray-400 disabled:to-gray-500 disabled:transform-none"
+                style={{ color: 'white', fontWeight: '700' }}
                 size="lg"
               >
                 {isCalculating ? (

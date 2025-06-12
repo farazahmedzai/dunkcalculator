@@ -158,6 +158,7 @@ export default function Home() {
           <Button
             onClick={() => scrollToSection('calculator')}
             className="bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all transform hover:scale-105 border-2 border-white"
+            style={{ color: '#ea580c', fontWeight: '600' }}
             size="lg"
           >
             Start Calculating

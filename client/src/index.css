@@ -158,152 +158,85 @@
   color: var(--basketball-orange);
 }
 
-/* Button text visibility fixes - Force text to be visible */
-button {
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  position: relative !important;
-}
-
-/* Ensure button text is always visible */
+/* ULTIMATE BUTTON TEXT VISIBILITY FIXES */
+/* Reset all button styling that might hide text */
 button,
-button span,
-button *:not(svg) {
+button *,
+[role="button"],
+[role="button"] * {
   color: inherit !important;
   opacity: 1 !important;
   visibility: visible !important;
+  display: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  text-indent: 0 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  white-space: nowrap !important;
 }
 
-/* Fix buttons with white/light text on dark backgrounds */
+/* Force specific text colors based on background */
+button[class*="bg-white"],
+button[class*="text-orange"],
+button[class*="text-red"],
+button[class*="text-blue"],
+button[class*="text-gray"],
+button[class*="text-black"] {
+  color: var(--foreground) !important;
+}
+
+/* White background buttons get dark text */
 button.bg-white,
 button[class*="bg-white"] {
-  color: #1f2937 !important;
+  color: #ea580c !important; /* orange-600 */
 }
 
-/* Fix buttons with dark backgrounds */
-button.bg-orange-600,
-button.bg-red-600,
+/* Dark background buttons get white text */
 button[class*="bg-orange"],
 button[class*="bg-red"],
-button[class*="bg-basketball-orange"] {
-  color: white !important;
-}
-
-/* Specific fix for gradient background buttons */
-.bg-gradient-to-br button,
-.bg-gradient-to-r button,
-section[class*="gradient"] button {
-  color: inherit !important;
-  text-shadow: none !important;
-}
-
-/* Fix outline buttons on gradient backgrounds */
-button[data-variant="outline"] {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(4px) !important;
-  border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  color: white !important;
-}
-
-/* Force button content visibility */
-button *:not(svg) {
-  display: inline !important;
-  opacity: 1 !important;
-}
-
-/* Ensure SVG icons don't interfere with text */
-button svg {
-  flex-shrink: 0 !important;
-}
-
-/* Text shadow for better visibility on gradient backgrounds */
-.bg-gradient-to-br button:not([class*="bg-white"]),
-.bg-gradient-to-r button:not([class*="bg-white"]) {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Additional button text fixes for specific cases */
+button[class*="bg-blue"],
+button[class*="bg-gray-900"],
+button[class*="bg-black"],
 button[class*="bg-gradient"] {
   color: white !important;
 }
 
-button[class*="bg-gradient"] * {
-  color: inherit !important;
-}
-
-/* Ensure primary button text is visible */
-button[data-variant="default"],
-.btn-primary,
-button.bg-primary {
+/* Primary button styling */
+button[data-variant="default"] {
   color: white !important;
 }
 
-/* Force visibility for all button children */
-button > *,
-button span,
-button div {
-  opacity: 1 !important;
-  color: inherit !important;
-}
-
-/* Comprehensive button text visibility fixes */
-button,
-[role="button"],
-.button,
-input[type="submit"],
-input[type="button"] {
-  font-size: inherit !important;
-  line-height: inherit !important;
-}
-
-/* Ensure text content is never hidden */
-button:not(:empty)::before,
-button:not(:empty)::after {
-  content: none !important;
-}
-
-/* Fix for buttons in specific containers */
+/* Gradient section buttons always white text */
 .bg-gradient-to-br button,
 .bg-gradient-to-r button,
-.bg-gradient-to-bl button,
-.bg-gradient-to-tl button,
-section[class*="gradient"] button,
-div[class*="gradient"] button {
+section[class*="gradient"] button {
   color: white !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Override any CSS that might hide button text */
+/* Specific override for the hero button */
+section.bg-gradient-to-br button.bg-white {
+  color: #ea580c !important; /* orange-600 */
+  text-shadow: none !important;
+}
+
+/* Calculator button */
+button[class*="bg-gradient"][class*="from-orange"] {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+/* Override any inherited styles */
 button * {
-  text-indent: 0 !important;
-  font-size: inherit !important;
-  line-height: inherit !important;
-  white-space: nowrap !important;
-}
-
-/* Specific fixes for shadcn button variants */
-button[data-variant] {
   color: inherit !important;
 }
 
-button[class*="text-white"] {
-  color: white !important;
-}
-
-button[class*="text-black"] {
-  color: black !important;
-}
-
-/* Ensure button content is always displayed */
-button .sr-only {
-  position: static !important;
-  width: auto !important;
-  height: auto !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  overflow: visible !important;
-  clip: auto !important;
-  white-space: normal !important;
+/* Remove any pseudo-elements that might hide text */
+button::before,
+button::after {
+  content: none !important;
 }
 
 /* Custom scrollbar for better UX */
