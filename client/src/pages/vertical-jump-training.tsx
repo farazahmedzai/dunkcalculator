@@ -98,7 +98,7 @@ export default function VerticalJumpTraining() {
               <Button
                 onClick={() => scrollToSection('exercises')}
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-orange-600 px-6 py-3"
+                className="border-white bg-transparent text-white hover:bg-white hover:text-orange-600 px-6 py-3 font-semibold"
               >
                 Browse Exercises
               </Button>

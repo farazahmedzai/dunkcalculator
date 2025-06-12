@@ -82,7 +82,7 @@ export default function AthleticPerformance() {
               <Button
                 onClick={() => scrollToSection('analysis-tools')}
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-blue-600 px-6 py-3"
+                className="border-white bg-transparent text-white hover:bg-white hover:text-blue-600 px-6 py-3 font-semibold"
               >
                 Analysis Tools
               </Button>

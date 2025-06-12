@@ -247,12 +247,12 @@ export default function Calculators() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/vertical-jump-training">
-              <Button size="lg" variant="secondary" className="text-gray-900">
+              <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100 font-semibold">
                 Explore Training Programs
               </Button>
             </Link>
             <Link href="/athletic-performance">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900">
+              <Button size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white hover:text-gray-900 font-semibold">
                 Learn Performance Science
               </Button>
             </Link>
