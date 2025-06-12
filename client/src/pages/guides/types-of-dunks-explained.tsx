@@ -1,10 +1,6 @@
-import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { 
-  Target, 
-  Star, 
   Zap, 
   Activity, 
   Award,
@@ -15,135 +11,9 @@ import {
   Video,
   TrendingUp
 } from "lucide-react";
-
-const dunkTypes = [
-  {
-    name: "One-Hand Slam",
-    difficulty: "Beginner",
-    requiredVertical: "24-30 inches",
-    style: "Power",
-    description: "The most basic and practical dunk, using one hand for maximum reach and control.",
-    technique: [
-      "Approach with 3-4 step runup",
-      "Jump off two feet for maximum power",
-      "Reach with dominant hand",
-      "Slam ball through rim with authority"
-    ],
-    advantages: [
-      "Easiest to execute consistently",
-      "Maximum reach with one arm",
-      "Good for shorter players",
-      "Game-applicable"
-    ],
-    tips: "Focus on perfect timing and approach angle. Keep non-dunking arm for balance.",
-    color: "green"
-  },
-  {
-    name: "Two-Hand Power Slam",
-    difficulty: "Beginner",
-    requiredVertical: "26-32 inches",
-    style: "Power",
-    description: "Classic two-handed dunk emphasizing power and control over the rim.",
-    technique: [
-      "Strong approach with momentum",
-      "Two-foot takeoff for stability",
-      "Grip ball with both hands above head",
-      "Drive through rim with full extension"
-    ],
-    advantages: [
-      "Most secure ball control",
-      "Intimidating power display",
-      "Lower chance of missing",
-      "Great for building confidence"
-    ],
-    tips: "Ensure you can palm or securely grip the ball. Practice the motion without jumping first.",
-    color: "blue"
-  },
-  {
-    name: "Tomahawk Dunk",
-    difficulty: "Intermediate",
-    requiredVertical: "30-36 inches",
-    style: "Power",
-    description: "Bringing the ball from behind the head in a chopping motion for dramatic effect.",
-    technique: [
-      "High approach with strong leap",
-      "Ball starts behind head with one hand",
-      "Arc ball forward in tomahawk motion",
-      "Slam with authority through rim"
-    ],
-    advantages: [
-      "Spectacular visual effect",
-      "Good for highlights",
-      "Shows superior athleticism",
-      "Crowd pleaser"
-    ],
-    tips: "Requires excellent timing and hand strength. Practice the motion slowly first.",
-    color: "orange"
-  },
-  {
-    name: "Windmill Dunk",
-    difficulty: "Advanced",
-    requiredVertical: "32-38 inches",
-    style: "Finesse",
-    description: "Ball travels in circular windmill motion around the body before slamming.",
-    technique: [
-      "One-foot takeoff for hang time",
-      "Start with ball at hip level",
-      "Circle ball around body in fluid motion",
-      "Complete rotation and slam"
-    ],
-    advantages: [
-      "Ultimate style points",
-      "Demonstrates exceptional coordination",
-      "Signature move potential",
-      "Contest winner"
-    ],
-    tips: "Requires significant hang time. Master the motion on lower rims first.",
-    color: "purple"
-  },
-  {
-    name: "360-Degree Dunk",
-    difficulty: "Advanced",
-    requiredVertical: "34-40 inches",
-    style: "Finesse",
-    description: "Full body rotation in the air while maintaining ball control.",
-    technique: [
-      "Approach with slight angle",
-      "One-foot takeoff with rotation initiation",
-      "Complete 360-degree spin in air",
-      "Locate rim and slam on landing side"
-    ],
-    advantages: [
-      "Ultimate difficulty showcase",
-      "Requires elite body control",
-      "Memorable highlight material",
-      "Professional-level skill"
-    ],
-    tips: "Start with 180-degree turns. Requires exceptional spatial awareness and timing.",
-    color: "red"
-  },
-  {
-    name: "Between-the-Legs",
-    difficulty: "Expert",
-    requiredVertical: "36-42 inches",
-    style: "Finesse",
-    description: "Ball passes between legs during flight for ultimate style demonstration.",
-    technique: [
-      "High approach with maximum hang time",
-      "Bring knees up toward chest",
-      "Pass ball between legs mid-flight",
-      "Catch and slam in one motion"
-    ],
-    advantages: [
-      "Elite-level skill demonstration",
-      "Exceptional coordination required",
-      "Unique and memorable",
-      "Professional highlight quality"
-    ],
-    tips: "Requires maximum vertical and perfect timing. Practice ball handling extensively.",
-    color: "indigo"
-  }
-];
+import PageHeader from "@/components/shared/page-header";
+import DunkCard from "@/components/shared/dunk-card";
+import { dunkTypes, getDunksByStyle } from "@/components/shared/dunk-types-data";
 
 export default function TypesOfDunksExplained() {
   const scrollToSection = (sectionId: string) => {
@@ -155,35 +25,7 @@ export default function TypesOfDunksExplained() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center">
-                <div className="w-8 h-8 bg-basketball-orange rounded-full flex items-center justify-center mr-3">
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none"/>
-                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
-                  </svg>
-                </div>
-                <span className="text-xl font-bold text-gray-900">Dunk Calculator</span>
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Calculator
-              </Link>
-              <Link href="/calculators" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Tools
-              </Link>
-              <Link href="/vertical-jump-training" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Training
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <PageHeader currentPage="guides" />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white py-16">
