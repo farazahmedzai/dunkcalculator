@@ -92,6 +92,7 @@ export default function VerticalJumpTraining() {
               <Button
                 onClick={() => scrollToSection('programs')}
                 className="bg-white text-orange-600 px-6 py-3 font-semibold hover:bg-gray-100"
+                style={{ color: '#ea580c', backgroundColor: 'white' }}
               >
                 View Programs
               </Button>
@@ -99,6 +100,7 @@ export default function VerticalJumpTraining() {
                 onClick={() => scrollToSection('exercises')}
                 variant="outline"
                 className="border-white bg-transparent text-white hover:bg-white hover:text-orange-600 px-6 py-3 font-semibold"
+                style={{ color: 'white', backgroundColor: 'transparent', borderColor: 'white' }}
               >
                 Browse Exercises
               </Button>
@@ -577,7 +579,7 @@ export default function VerticalJumpTraining() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/">
-              <Button className="bg-white text-orange-600 px-8 py-3 font-semibold hover:bg-gray-100">
+              <Button className="bg-white text-orange-600 px-8 py-3 font-semibold hover:bg-gray-100" style={{ color: '#ea580c', backgroundColor: 'white' }}>
                 Calculate Your Dunk Requirements
               </Button>
             </Link>
@@ -585,6 +587,7 @@ export default function VerticalJumpTraining() {
               <Button 
                 variant="outline" 
                 className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3"
+                style={{ color: 'white', backgroundColor: 'transparent', borderColor: 'white' }}
               >
                 Browse All Tools
               </Button>

@@ -76,6 +76,7 @@ export default function AthleticPerformance() {
               <Button
                 onClick={() => scrollToSection('performance-factors')}
                 className="bg-white text-blue-600 px-6 py-3 font-semibold hover:bg-gray-100"
+                style={{ color: '#2563eb', backgroundColor: 'white' }}
               >
                 Explore Performance Factors
               </Button>
@@ -83,6 +84,7 @@ export default function AthleticPerformance() {
                 onClick={() => scrollToSection('analysis-tools')}
                 variant="outline"
                 className="border-white bg-transparent text-white hover:bg-white hover:text-blue-600 px-6 py-3 font-semibold"
+                style={{ color: 'white', backgroundColor: 'transparent', borderColor: 'white' }}
               >
                 Analysis Tools
               </Button>
