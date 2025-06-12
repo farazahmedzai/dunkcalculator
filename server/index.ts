@@ -1,6 +1,8 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import fs from "fs";
+import path from "path";
 
 const app = express();
 app.use(express.json());
@@ -40,8 +42,6 @@ app.use((req, res, next) => {
   // Register sitemap route before any other middleware
   app.get("/sitemap.xml", (req, res) => {
     res.set("Content-Type", "text/xml");
-    const fs = require("fs");
-    const path = require("path");
     const sitemapPath = path.resolve(process.cwd(), "public/sitemap.xml");
     
     if (fs.existsSync(sitemapPath)) {
