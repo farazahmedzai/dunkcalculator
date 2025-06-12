@@ -159,7 +159,7 @@ export default function Calculators() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <Link href={calculator.url}>
-                      <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white">
+                      <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105">
                         Use Calculator
                       </Button>
                     </Link>
@@ -193,7 +193,7 @@ export default function Calculators() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <Link href={calculator.url}>
-                      <Button variant="outline" className="w-full border-blue-200 text-blue-600 hover:bg-blue-50">
+                      <Button variant="outline" className="w-full border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white font-semibold py-3 rounded-lg transition-all transform hover:scale-105">
                         Use Tool
                       </Button>
                     </Link>
