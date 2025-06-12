@@ -25,6 +25,11 @@ export default function VerticalJumpTraining() {
     }
   };
 
+  const handleProgramStart = (programType: string) => {
+    // For now, scroll to program details or show alert
+    alert(`Starting ${programType} program! This would redirect to the program details or sign-up page.`);
+  };
+
   const breadcrumbs: BreadcrumbItem[] = [
     { name: 'Home', url: '/' },
     { name: 'Vertical Jump Training', url: '/vertical-jump-training' }
@@ -173,7 +178,12 @@ export default function VerticalJumpTraining() {
                   </ul>
                 </div>
                 
-                <Button className="w-full">Start Foundation Program</Button>
+                <Button 
+                  className="w-full"
+                  onClick={() => handleProgramStart('Foundation Builder')}
+                >
+                  Start Foundation Program
+                </Button>
               </CardContent>
             </Card>
 
@@ -215,7 +225,10 @@ export default function VerticalJumpTraining() {
                   </ul>
                 </div>
                 
-                <Button className="w-full bg-basketball-orange hover:bg-orange-700">
+                <Button 
+                  className="w-full bg-basketball-orange hover:bg-orange-700"
+                  onClick={() => handleProgramStart('Power Developer')}
+                >
                   Start Power Program
                 </Button>
               </CardContent>
@@ -259,7 +272,10 @@ export default function VerticalJumpTraining() {
                   </ul>
                 </div>
                 
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                <Button 
+                  className="w-full bg-purple-600 hover:bg-purple-700"
+                  onClick={() => handleProgramStart('Elite Performance')}
+                >
                   Start Elite Program
                 </Button>
               </CardContent>
