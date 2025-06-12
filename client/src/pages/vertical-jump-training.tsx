@@ -25,38 +25,53 @@ export default function VerticalJumpTraining() {
     }
   };
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Vertical Jump Training', url: '/vertical-jump-training' }
+  ];
+
+  const seoData = {
+    title: "Vertical Jump Training Programs - Increase Your Jump Height | Dunk Calculator Pro",
+    description: "Science-backed vertical jump training programs, exercises, and techniques to maximize your vertical leap. Complete 12-week programs, plyometric exercises, and dunking guides.",
+    keywords: "vertical jump training, jump training program, plyometric exercises, vertical leap training, basketball training, dunk training, jump higher exercises, vertical jump workout",
+    canonicalUrl: `${window.location.origin}/vertical-jump-training`,
+    ogTitle: "Vertical Jump Training Programs - Increase Your Jump Height",
+    ogDescription: "Science-backed vertical jump training programs and exercises to maximize your vertical leap and dunking ability.",
+    twitterTitle: "Vertical Jump Training Programs - Increase Your Jump Height",
+    twitterDescription: "Complete vertical jump training programs with plyometric exercises and techniques to maximize your vertical leap.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateArticleSchema(
+        "Complete Guide to Vertical Jump Training",
+        "Comprehensive vertical jump training guide covering science-backed programs, exercises, and techniques to maximize your vertical leap and dunking ability.",
+        new Date().toISOString(),
+        new Date().toISOString(),
+        "Dunk Calculator Pro Training Team",
+        `${window.location.origin}/vertical-jump-training`
+      ),
+      generateWebPageSchema(
+        "Vertical Jump Training Programs - Increase Your Jump Height",
+        "Science-backed vertical jump training programs, exercises, and techniques to maximize your vertical leap. Complete 12-week programs, plyometric exercises, and dunking guides.",
+        `${window.location.origin}/vertical-jump-training`
+      ),
+      generateHowToSchema(
+        "How to Increase Your Vertical Jump",
+        "Step-by-step guide to increasing your vertical jump through structured training programs",
+        [
+          { name: "Assessment Phase", text: "Test your current vertical jump and identify limiting factors" },
+          { name: "Foundation Building", text: "Build base strength with squats, deadlifts, and basic plyometrics" },
+          { name: "Power Development", text: "Add explosive movements like jump squats and depth jumps" },
+          { name: "Skill Integration", text: "Practice sport-specific jumping movements and techniques" },
+          { name: "Peak Performance", text: "Fine-tune timing and maximize power output for competition" }
+        ],
+        "12-16 weeks",
+        "Gym membership or basic equipment"
+      )
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center">
-                <div className="w-8 h-8 bg-basketball-orange rounded-full flex items-center justify-center mr-3">
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none"/>
-                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
-                  </svg>
-                </div>
-                <span className="text-xl font-bold text-gray-900">Dunk Calculator</span>
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Calculator
-              </Link>
-              <Link href="/calculators" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Tools
-              </Link>
-              <span className="text-basketball-orange font-semibold">Training</span>
-              <Link href="/athletic-performance" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Performance
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Vertical Jump Training" className="bg-gray-50 dark:bg-gray-900">
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-orange-600 to-red-600 text-white py-16">
@@ -561,6 +576,6 @@ export default function VerticalJumpTraining() {
           </div>
         </div>
       </section>
-    </div>
+    </SEOPageLayout>
   );
 }

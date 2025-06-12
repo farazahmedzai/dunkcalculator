@@ -24,6 +24,38 @@ export default function VerticalJumpCalculator() {
   const [results, setResults] = useState<JumpResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators' },
+    { name: 'Vertical Jump Calculator', url: '/calculators/vertical-jump-calculator' }
+  ];
+
+  const seoData = {
+    title: "Vertical Jump Calculator - Measure & Track Your Jump Height | Dunk Calculator Pro",
+    description: "Professional vertical jump calculator with multiple measurement methods. Calculate your vertical leap, get percentile rankings, power output analysis, and personalized training recommendations.",
+    keywords: "vertical jump calculator, vertical leap measurement, jump height calculator, basketball vertical, vertical jump test, jump performance analysis, vertical jump training",
+    canonicalUrl: `${window.location.origin}/calculators/vertical-jump-calculator`,
+    ogTitle: "Vertical Jump Calculator - Measure & Track Your Jump Height",
+    ogDescription: "Professional vertical jump calculator with multiple measurement methods. Get detailed insights and personalized training recommendations.",
+    twitterTitle: "Vertical Jump Calculator - Measure & Track Your Jump Height",
+    twitterDescription: "Calculate your vertical leap with professional accuracy. Multiple methods, detailed analysis, training recommendations.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateCalculatorSchema(
+        "Vertical Jump Calculator",
+        "Professional vertical jump calculator with multiple measurement methods including hang time, reach difference, and jump mat measurements. Provides percentile rankings, power output analysis, and personalized training recommendations.",
+        `${window.location.origin}/calculators/vertical-jump-calculator`,
+        ["Jump Method", "Hang Time", "Reach Difference", "Body Weight", "Age", "Gender"],
+        ["Vertical Jump Height", "Percentile Rank", "Power Output", "Performance Assessment", "Training Recommendations"]
+      ),
+      generateWebPageSchema(
+        "Vertical Jump Calculator - Measure & Track Your Jump Height",
+        "Professional vertical jump calculator with multiple measurement methods. Calculate your vertical leap, get percentile rankings, power output analysis, and personalized training recommendations.",
+        `${window.location.origin}/calculators/vertical-jump-calculator`
+      )
+    ]
+  };
+
   const form = useForm<VerticalJumpCalculatorForm>({
     resolver: zodResolver(verticalJumpCalculatorSchema),
     defaultValues: {
@@ -107,29 +139,7 @@ export default function VerticalJumpCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/calculators">
-              <Button variant="ghost" className="text-blue-600 hover:text-blue-700">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Calculators
-              </Button>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
-                Dunk Calculator
-              </Link>
-              <Link href="/vertical-jump-training" className="text-gray-600 hover:text-blue-600 transition-colors">
-                Training Programs
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
-
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Vertical Jump Calculator" className="bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
@@ -407,6 +417,6 @@ export default function VerticalJumpCalculator() {
           </div>
         </div>
       </div>
-    </div>
+    </SEOPageLayout>
   );
 }

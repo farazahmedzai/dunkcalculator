@@ -25,6 +25,38 @@ export default function StandingReachCalculator() {
   const [results, setResults] = useState<ReachResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators' },
+    { name: 'Standing Reach Calculator', url: '/calculators/standing-reach-calculator' }
+  ];
+
+  const seoData = {
+    title: "Standing Reach Calculator - Calculate Your Basketball Reach | Dunk Calculator Pro",
+    description: "Professional standing reach calculator for basketball players. Calculate your standing reach based on height and body proportions. Essential for accurate dunk requirements.",
+    keywords: "standing reach calculator, basketball reach, arm span calculator, reach measurement, basketball anthropometry, dunk reach calculator, standing reach test",
+    canonicalUrl: `${window.location.origin}/calculators/standing-reach-calculator`,
+    ogTitle: "Standing Reach Calculator - Calculate Your Basketball Reach",
+    ogDescription: "Professional standing reach calculator for basketball players. Calculate your reach based on height and body proportions.",
+    twitterTitle: "Standing Reach Calculator - Calculate Your Basketball Reach",
+    twitterDescription: "Calculate your standing reach for basketball. Essential for determining dunk requirements accurately.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateCalculatorSchema(
+        "Standing Reach Calculator",
+        "Professional standing reach calculator that estimates your maximum reach based on height, arm span, and body proportions. Essential tool for basketball players to determine accurate dunk requirements.",
+        `${window.location.origin}/calculators/standing-reach-calculator`,
+        ["Height", "Arm Span", "Gender", "Sport", "Calculation Type"],
+        ["Standing Reach", "Reach-to-Height Ratio", "Comparison Analysis", "Accuracy Assessment", "Recommendations"]
+      ),
+      generateWebPageSchema(
+        "Standing Reach Calculator - Calculate Your Basketball Reach",
+        "Professional standing reach calculator for basketball players. Calculate your standing reach based on height and body proportions. Essential for accurate dunk requirements.",
+        `${window.location.origin}/calculators/standing-reach-calculator`
+      )
+    ]
+  };
+
   const form = useForm<StandingReachCalculatorForm>({
     resolver: zodResolver(standingReachCalculatorSchema),
     defaultValues: {
@@ -134,29 +166,7 @@ export default function StandingReachCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/calculators">
-              <Button variant="ghost" className="text-green-600 hover:text-green-700">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Calculators
-              </Button>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-green-600 transition-colors">
-                Dunk Calculator
-              </Link>
-              <Link href="/calculators/vertical-jump-calculator" className="text-gray-600 hover:text-green-600 transition-colors">
-                Vertical Jump Calculator
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
-
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Standing Reach Calculator" className="bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
@@ -440,6 +450,6 @@ export default function StandingReachCalculator() {
           </div>
         </div>
       </div>
-    </div>
+    </SEOPageLayout>
   );
 }
