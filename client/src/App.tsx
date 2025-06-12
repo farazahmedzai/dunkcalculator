@@ -34,6 +34,8 @@ function Router() {
       <Route path="/athletic-performance" component={AthleticPerformance} />
       <Route path="/can-i-dunk" component={CanIDunk} />
       <Route path="/how-to-dunk-a-basketball" component={HowToDunkABasketball} />
+      <Route path="/dunking-requirements-by-height" component={DunkingRequirementsByHeight} />
+      <Route path="/guides/types-of-dunks-explained" component={TypesOfDunksExplained} />
       <Route component={NotFound} />
     </Switch>
   );
