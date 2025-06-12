@@ -162,47 +162,148 @@
 button {
   font-size: 14px !important;
   font-weight: 500 !important;
+  position: relative !important;
+}
+
+/* Ensure button text is always visible */
+button,
+button span,
+button *:not(svg) {
+  color: inherit !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Fix buttons with white/light text on dark backgrounds */
+button.bg-white,
+button[class*="bg-white"] {
+  color: #1f2937 !important;
+}
+
+/* Fix buttons with dark backgrounds */
+button.bg-orange-600,
+button.bg-red-600,
+button[class*="bg-orange"],
+button[class*="bg-red"],
+button[class*="bg-basketball-orange"] {
+  color: white !important;
+}
+
+/* Specific fix for gradient background buttons */
+.bg-gradient-to-br button,
+.bg-gradient-to-r button,
+section[class*="gradient"] button {
+  color: inherit !important;
+  text-shadow: none !important;
 }
 
 /* Fix outline buttons on gradient backgrounds */
 button[data-variant="outline"] {
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
   backdrop-filter: blur(4px) !important;
-  border: 2px solid !important;
-}
-
-/* Ensure white text buttons are visible on any background */
-.text-white, 
-button.text-white,
-button .text-white {
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
   color: white !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Ensure dark text buttons are visible */
-.text-gray-900, 
-.text-black,
-button.text-gray-900,
-button .text-gray-900 {
-  color: #111827 !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+/* Force button content visibility */
+button *:not(svg) {
+  display: inline !important;
+  opacity: 1 !important;
 }
 
-/* Force button text visibility regardless of parent */
-button * {
+/* Ensure SVG icons don't interfere with text */
+button svg {
+  flex-shrink: 0 !important;
+}
+
+/* Text shadow for better visibility on gradient backgrounds */
+.bg-gradient-to-br button:not([class*="bg-white"]),
+.bg-gradient-to-r button:not([class*="bg-white"]) {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Additional button text fixes for specific cases */
+button[class*="bg-gradient"] {
+  color: white !important;
+}
+
+button[class*="bg-gradient"] * {
   color: inherit !important;
 }
 
-/* Specific fix for buttons on gradient backgrounds */
-button[style*="background"] {
+/* Ensure primary button text is visible */
+button[data-variant="default"],
+.btn-primary,
+button.bg-primary {
+  color: white !important;
+}
+
+/* Force visibility for all button children */
+button > *,
+button span,
+button div {
+  opacity: 1 !important;
   color: inherit !important;
 }
 
-/* Override any conflicting styles */
-.bg-gradient-to-r button,
+/* Comprehensive button text visibility fixes */
+button,
+[role="button"],
+.button,
+input[type="submit"],
+input[type="button"] {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+/* Ensure text content is never hidden */
+button:not(:empty)::before,
+button:not(:empty)::after {
+  content: none !important;
+}
+
+/* Fix for buttons in specific containers */
 .bg-gradient-to-br button,
-.bg-gradient-to-bl button {
+.bg-gradient-to-r button,
+.bg-gradient-to-bl button,
+.bg-gradient-to-tl button,
+section[class*="gradient"] button,
+div[class*="gradient"] button {
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+/* Override any CSS that might hide button text */
+button * {
+  text-indent: 0 !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  white-space: nowrap !important;
+}
+
+/* Specific fixes for shadcn button variants */
+button[data-variant] {
   color: inherit !important;
+}
+
+button[class*="text-white"] {
+  color: white !important;
+}
+
+button[class*="text-black"] {
+  color: black !important;
+}
+
+/* Ensure button content is always displayed */
+button .sr-only {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
 }
 
 /* Custom scrollbar for better UX */
