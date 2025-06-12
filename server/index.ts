@@ -37,6 +37,20 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Register sitemap route before any other middleware
+  app.get("/sitemap.xml", (req, res) => {
+    res.set("Content-Type", "text/xml");
+    const fs = require("fs");
+    const path = require("path");
+    const sitemapPath = path.resolve(process.cwd(), "public/sitemap.xml");
+    
+    if (fs.existsSync(sitemapPath)) {
+      res.sendFile(sitemapPath);
+    } else {
+      res.status(404).send("Sitemap not found");
+    }
+  });
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
