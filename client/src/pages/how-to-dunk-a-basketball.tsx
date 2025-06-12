@@ -53,8 +53,7 @@ export default function HowToDunkABasketball() {
               </Button>
               <Button
                 onClick={() => scrollToSection('technique')}
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-6 py-3 font-semibold shadow-lg bg-transparent"
+                className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-6 py-3 font-semibold shadow-lg bg-black/20 backdrop-blur-sm"
               >
                 Master the Technique
               </Button>

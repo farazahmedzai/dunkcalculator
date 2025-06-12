@@ -593,7 +593,7 @@ export default function Home() {
                 </div>
                 <p className="text-gray-600 mb-4">Track and analyze your vertical jump progress with detailed metrics and percentile rankings.</p>
                 <Link href="/calculators/vertical-jump-calculator">
-                  <Button variant="outline" className="w-full">Calculate Now</Button>
+                  <Button className="w-full border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white font-semibold">Calculate Now</Button>
                 </Link>
               </CardContent>
             </Card>
@@ -610,7 +610,7 @@ export default function Home() {
                 </div>
                 <p className="text-gray-600 mb-4">Determine your standing reach based on height and body proportions for accurate dunk requirements.</p>
                 <Link href="/calculators/standing-reach-calculator">
-                  <Button variant="outline" className="w-full">Calculate Now</Button>
+                  <Button className="w-full border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white font-semibold">Calculate Now</Button>
                 </Link>
               </CardContent>
             </Card>
@@ -627,7 +627,7 @@ export default function Home() {
                 </div>
                 <p className="text-gray-600 mb-4">Compare your one-foot approach versus two-foot standing jump performance and optimization.</p>
                 <Link href="/calculators/approach-vs-standing-jump-calculator">
-                  <Button variant="outline" className="w-full">Calculate Now</Button>
+                  <Button className="w-full border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white font-semibold">Calculate Now</Button>
                 </Link>
               </CardContent>
             </Card>
