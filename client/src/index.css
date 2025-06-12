@@ -158,113 +158,47 @@
   color: var(--basketball-orange);
 }
 
-/* ULTIMATE BUTTON TEXT VISIBILITY FIXES */
-/* Reset all button styling that might hide text */
-button,
-button *,
-[role="button"],
-[role="button"] * {
+/* BUTTON TEXT VISIBILITY AND CENTERING FIXES */
+button {
   color: inherit !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+}
+
+/* Ensure button text is visible and properly styled */
+button,
+button * {
   opacity: 1 !important;
   visibility: visible !important;
-  display: inherit !important;
   font-size: inherit !important;
-  line-height: inherit !important;
-  text-indent: 0 !important;
-  text-transform: none !important;
-  letter-spacing: normal !important;
-  white-space: nowrap !important;
-  text-align: center !important;
-  justify-content: center !important;
-  align-items: center !important;
+  line-height: 1.5 !important;
 }
 
-/* Force specific text colors based on background */
-button[class*="bg-white"],
-button[class*="text-orange"],
-button[class*="text-red"],
-button[class*="text-blue"],
-button[class*="text-gray"],
-button[class*="text-black"] {
-  color: var(--foreground) !important;
-}
-
-/* White background buttons get dark text */
+/* Force text colors for different button types */
 button.bg-white,
 button[class*="bg-white"] {
-  color: #ea580c !important; /* orange-600 */
+  color: #ea580c !important;
 }
 
-/* Dark background buttons get white text */
+button[class*="bg-gradient"],
 button[class*="bg-orange"],
-button[class*="bg-red"],
-button[class*="bg-blue"],
-button[class*="bg-gray-900"],
-button[class*="bg-black"],
-button[class*="bg-gradient"] {
+button[class*="bg-red"] {
   color: white !important;
 }
 
-/* Primary button styling */
-button[data-variant="default"] {
-  color: white !important;
-}
-
-/* Gradient section buttons always white text */
-.bg-gradient-to-br button,
-.bg-gradient-to-r button,
-section[class*="gradient"] button {
-  color: white !important;
-  font-weight: 600 !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
-}
-
-/* Specific override for the hero button */
-section.bg-gradient-to-br button.bg-white {
-  color: #ea580c !important; /* orange-600 */
-  text-shadow: none !important;
-}
-
-/* Calculator button */
-button[class*="bg-gradient"][class*="from-orange"] {
-  color: white !important;
+/* Hero section button override */
+.bg-gradient-to-br button.bg-white {
+  color: #ea580c !important;
   font-weight: 600 !important;
 }
 
-/* Override any inherited styles */
-button * {
-  color: inherit !important;
-}
-
-/* Remove any pseudo-elements that might hide text */
-button::before,
-button::after {
-  content: none !important;
-}
-
-/* Force button content centering */
-button {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-}
-
-/* Center button text specifically */
-button span,
-button div,
-button > * {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  width: 100% !important;
-}
-
-/* Ensure SVG icons and text are centered together */
-button svg {
-  margin-left: 0.5rem !important;
-  margin-right: 0.5rem !important;
+/* Calculator button styling */
+button[class*="from-orange"][class*="to-red"] {
+  color: white !important;
+  font-weight: 700 !important;
 }
 
 /* Custom scrollbar for better UX */
