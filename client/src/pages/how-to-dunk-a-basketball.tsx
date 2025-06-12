@@ -16,6 +16,9 @@ import {
   BookOpen,
   Video
 } from "lucide-react";
+import PageHeader from "@/components/shared/page-header";
+import DunkCard from "@/components/shared/dunk-card";
+import { getDunkByName } from "@/components/shared/dunk-types-data";
 
 export default function HowToDunkABasketball() {
   const scrollToSection = (sectionId: string) => {
@@ -27,35 +30,7 @@ export default function HowToDunkABasketball() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center">
-                <div className="w-8 h-8 bg-basketball-orange rounded-full flex items-center justify-center mr-3">
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none"/>
-                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
-                  </svg>
-                </div>
-                <span className="text-xl font-bold text-gray-900">Dunk Calculator</span>
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Calculator
-              </Link>
-              <Link href="/calculators" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Tools
-              </Link>
-              <Link href="/vertical-jump-training" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Training
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <PageHeader currentPage="guides" />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-orange-600 to-red-600 text-white py-16">
@@ -275,11 +250,12 @@ export default function HowToDunkABasketball() {
                       <Badge variant="secondary" className="mt-1">Advanced</Badge>
                     </div>
                     
-                    <div className="border-l-4 border-red-500 pl-4">
-                      <h4 className="font-semibold">Windmill Dunk</h4>
-                      <p className="text-sm text-gray-600">Spectacular circular arm motion requiring exceptional hang time.</p>
-                      <Badge variant="secondary" className="mt-1">Expert</Badge>
-                    </div>
+                    {(() => {
+                      const windmillDunk = getDunkByName("Windmill Dunk");
+                      return windmillDunk ? (
+                        <DunkCard dunk={windmillDunk} variant="summary" />
+                      ) : null;
+                    })()}
                   </div>
                 </CardContent>
               </Card>
