@@ -47,14 +47,14 @@ export default function HowToDunkABasketball() {
             <div className="flex flex-wrap justify-center gap-4">
               <Button
                 onClick={() => scrollToSection('fundamentals')}
-                className="bg-white text-orange-600 px-6 py-3 font-semibold hover:bg-gray-100"
+                className="bg-white text-orange-600 px-6 py-3 font-semibold hover:bg-gray-100 border-2 border-white shadow-lg"
               >
                 Learn the Fundamentals
               </Button>
               <Button
                 onClick={() => scrollToSection('technique')}
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-orange-600 px-6 py-3"
+                className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-6 py-3 font-semibold shadow-lg bg-transparent"
               >
                 Master the Technique
               </Button>
