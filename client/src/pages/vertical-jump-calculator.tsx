@@ -1,26 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { verticalJumpCalculatorSchema, type VerticalJumpCalculatorForm } from "@/lib/validation-schemas";
 import { TrendingUp, ArrowLeft, Calculator, Target } from "lucide-react";
-
-const verticalJumpSchema = z.object({
-  jumpMethod: z.enum(["hangTime", "reachHeight", "measurement"]),
-  hangTime: z.number().min(0.1).max(2).optional(),
-  maxReach: z.number().min(60).max(150).optional(),
-  standingReach: z.number().min(60).max(120).optional(),
-  directMeasurement: z.number().min(0).max(60).optional(),
-  bodyWeight: z.number().min(80).max(400).optional(),
-  age: z.number().min(12).max(60).optional(),
-});
-
-type VerticalJumpForm = z.infer<typeof verticalJumpSchema>;
 
 interface JumpResults {
   verticalJump: number;

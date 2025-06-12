@@ -1,27 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { calculateDunkRequirements } from "@/lib/calculator";
+import { dunkCalculatorSchema, type DunkCalculatorForm } from "@/lib/validation-schemas";
 import type { CalculationResults } from "@/pages/home";
-
-const calculatorSchema = z.object({
-  height: z.number().min(48, "Height must be at least 48 inches").max(96, "Height must be less than 96 inches"),
-  standingReach: z.number().min(60, "Standing reach must be at least 60 inches").max(120, "Standing reach must be less than 120 inches"),
-  rimHeight: z.number().min(84, "Rim height must be at least 84 inches").max(120, "Rim height must be less than 120 inches"),
-  clearance: z.number().min(2, "Clearance must be at least 2 inches").max(12, "Clearance must be less than 12 inches"),
-  bodyWeight: z.number().min(80, "Body weight must be at least 80 lbs").max(400, "Body weight must be less than 400 lbs").optional(),
-  jumpType: z.enum(["standing", "approach"]).default("standing"),
-  handSize: z.enum(["small", "average", "large"]).default("average"),
-  experience: z.enum(["beginner", "intermediate", "advanced"]).default("beginner"),
-});
-
-type CalculatorFormData = z.infer<typeof calculatorSchema>;
 
 interface DunkCalculatorProps {
   onCalculate: (results: CalculationResults) => void;
@@ -30,8 +17,8 @@ interface DunkCalculatorProps {
 export default function DunkCalculator({ onCalculate }: DunkCalculatorProps) {
   const [isCalculating, setIsCalculating] = useState(false);
 
-  const form = useForm<CalculatorFormData>({
-    resolver: zodResolver(calculatorSchema),
+  const form = useForm<DunkCalculatorForm>({
+    resolver: zodResolver(dunkCalculatorSchema),
     defaultValues: {
       height: 0,
       standingReach: 0,
@@ -44,7 +31,7 @@ export default function DunkCalculator({ onCalculate }: DunkCalculatorProps) {
     },
   });
 
-  const onSubmit = async (data: CalculatorFormData) => {
+  const onSubmit = async (data: DunkCalculatorForm) => {
     setIsCalculating(true);
     
     try {
