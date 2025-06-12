@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { maxPotentialCalculatorSchema, type MaxPotentialCalculatorForm } from "@/lib/validation-schemas";
 import { ArrowLeft, Target, TrendingUp, Clock, Star } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface PotentialResults {
   maxPotential: number;

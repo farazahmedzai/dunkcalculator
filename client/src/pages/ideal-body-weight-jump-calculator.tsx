@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { idealWeightCalculatorSchema, type IdealWeightCalculatorForm } from "@/lib/validation-schemas";
 import { ArrowLeft, Scale, TrendingUp, Target, AlertCircle } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface WeightResults {
   idealWeight: number;

@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { jumpFatigueCalculatorSchema, type JumpFatigueCalculatorForm } from "@/lib/validation-schemas";
 import { ArrowLeft, Zap, TrendingDown, Clock, AlertTriangle } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface FatigueResults {
   fatigueIndex: number;

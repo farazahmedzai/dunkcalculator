@@ -8,6 +8,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { jumpComparisonCalculatorSchema, type JumpComparisonCalculatorForm } from "@/lib/validation-schemas";
 import { Activity, ArrowLeft, BarChart, Target } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface ComparisonResults {
   approachAdvantage: number;
@@ -22,6 +24,38 @@ interface ComparisonResults {
 export default function ApproachVsStandingJumpCalculator() {
   const [results, setResults] = useState<ComparisonResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators' },
+    { name: 'Approach vs Standing Jump Calculator', url: '/calculators/approach-vs-standing-jump-calculator' }
+  ];
+
+  const seoData = {
+    title: "Approach vs Standing Jump Calculator - Compare Your Jump Styles | Dunk Calculator Pro",
+    description: "Compare one-foot approach jump vs two-foot standing jump performance. Analyze your optimal jumping style, get personalized recommendations, and improve your vertical leap technique.",
+    keywords: "approach jump calculator, standing jump calculator, one foot vs two foot jump, jump comparison calculator, basketball jump analysis, vertical jump technique, jump style optimization",
+    canonicalUrl: `${window.location.origin}/calculators/approach-vs-standing-jump-calculator`,
+    ogTitle: "Approach vs Standing Jump Calculator - Compare Your Jump Styles",
+    ogDescription: "Compare one-foot approach vs two-foot standing jump performance. Discover your optimal jumping style and get personalized training recommendations.",
+    twitterTitle: "Approach vs Standing Jump Calculator - Compare Your Jump Styles",
+    twitterDescription: "Compare your approach vs standing jump performance. Optimize your jumping technique with detailed analysis.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateCalculatorSchema(
+        "Approach vs Standing Jump Comparison Calculator",
+        "Professional calculator that compares one-foot approach jump performance versus two-foot standing jump. Analyzes optimal jumping style, strength profile, and provides personalized training recommendations.",
+        `${window.location.origin}/calculators/approach-vs-standing-jump-calculator`,
+        ["Approach Jump Height", "Standing Jump Height", "Dominant Leg", "Experience Level", "Training History"],
+        ["Approach Advantage", "Percentage Increase", "Jumping Style", "Strength Profile", "Training Focus", "Recommendations"]
+      ),
+      generateWebPageSchema(
+        "Approach vs Standing Jump Calculator - Compare Your Jump Styles",
+        "Compare one-foot approach jump vs two-foot standing jump performance. Analyze your optimal jumping style, get personalized recommendations, and improve your vertical leap technique.",
+        `${window.location.origin}/calculators/approach-vs-standing-jump-calculator`
+      )
+    ]
+  };
 
   const form = useForm<JumpComparisonCalculatorForm>({
     resolver: zodResolver(jumpComparisonCalculatorSchema),
@@ -123,29 +157,7 @@ export default function ApproachVsStandingJumpCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/calculators">
-              <Button variant="ghost" className="text-purple-600 hover:text-purple-700">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Calculators
-              </Button>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Dunk Calculator
-              </Link>
-              <Link href="/calculators/vertical-jump-calculator" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Vertical Jump Calculator
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
-
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Approach vs Standing Jump Calculator" className="bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
@@ -433,6 +445,6 @@ export default function ApproachVsStandingJumpCalculator() {
           </div>
         </div>
       </div>
-    </div>
+    </SEOPageLayout>
   );
 }
