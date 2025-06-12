@@ -178,7 +178,7 @@ export default function TypesOfDunksExplained() {
               </Button>
             </Link>
             <Link href="/vertical-jump-training">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900">
+              <Button size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white hover:text-gray-900 font-semibold">
                 Start Training Program
               </Button>
             </Link>

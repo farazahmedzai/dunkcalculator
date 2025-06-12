@@ -158,6 +158,26 @@
   color: var(--basketball-orange);
 }
 
+/* Button text visibility fixes */
+.bg-gradient-to-r button,
+.bg-gradient-to-br button,
+.bg-gradient-to-bl button,
+.bg-gradient-to-l button,
+.bg-gradient-to-t button,
+.bg-gradient-to-b button {
+  color: inherit !important;
+}
+
+/* Ensure button text is always visible on gradient backgrounds */
+button[class*="border-white"][class*="text-white"] {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+button[class*="bg-white"][class*="text-"] {
+  background-color: white !important;
+}
+
 /* Custom scrollbar for better UX */
 ::-webkit-scrollbar {
   width: 8px;
