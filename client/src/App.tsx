@@ -15,6 +15,8 @@ import VerticalJumpTraining from "@/pages/vertical-jump-training";
 import AthleticPerformance from "@/pages/athletic-performance";
 import CanIDunk from "@/pages/can-i-dunk";
 import HowToDunkABasketball from "@/pages/how-to-dunk-a-basketball";
+import DunkingRequirementsByHeight from "@/pages/dunking-requirements-by-height";
+import TypesOfDunksExplained from "@/pages/guides/types-of-dunks-explained";
 import NotFound from "@/pages/not-found";
 
 function Router() {
