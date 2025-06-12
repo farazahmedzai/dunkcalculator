@@ -4,8 +4,11 @@ import DunkCalculator from "@/components/dunk-calculator";
 import CalculatorResults from "@/components/calculator-results";
 import JumpVisualization from "@/components/jump-visualization";
 import FAQSection from "@/components/faq-section";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { generateCalculatorSchema, generateWebPageSchema, generateFAQSchema } from "@/lib/seo";
+import { generalFAQs } from "@/components/shared/faq-data";
 
 export interface CalculationResults {
   requiredVertical: number;
@@ -25,84 +28,51 @@ export default function Home() {
     }
   };
 
+  const seoData = {
+    title: "Basketball Dunk Calculator - Calculate Your Vertical Jump Requirements | Dunk Calculator Pro",
+    description: "Professional basketball dunk calculator with physics-based calculations. Calculate your exact vertical jump requirements, hang-time, and power needed to dunk with scientific precision. Free online tool.",
+    keywords: "dunk calculator, vertical jump calculator, basketball dunk, vertical leap, jump height calculator, dunk requirements, basketball training, vertical jump training",
+    canonicalUrl: `${window.location.origin}/`,
+    ogTitle: "Basketball Dunk Calculator - See Exactly What You Need to Fly",
+    ogDescription: "Calculate your exact vertical jump requirements with our professional dunk calculator. Physics-based calculations, interactive visualizations, and training recommendations.",
+    ogType: "website",
+    twitterTitle: "Basketball Dunk Calculator - Calculate Your Vertical Jump Requirements",
+    twitterDescription: "Professional dunk calculator with physics-based calculations. See exactly what you need to dunk!",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateCalculatorSchema(
+        "Basketball Dunk Calculator",
+        "Professional basketball dunk calculator with physics-based calculations, interactive visualizations, and comprehensive training resources",
+        `${window.location.origin}/`,
+        ["Height", "Standing Reach", "Rim Height", "Clearance", "Body Weight", "Jump Type"],
+        ["Required Vertical Jump", "Hang Time", "Power Output", "Dunk Assessment"]
+      ),
+      generateWebPageSchema(
+        "Basketball Dunk Calculator - Calculate Your Vertical Jump Requirements",
+        "Professional basketball dunk calculator with physics-based calculations. Calculate your exact vertical jump requirements, hang-time, and power needed to dunk with scientific precision.",
+        `${window.location.origin}/`
+      ),
+      generateFAQSchema([
+        {
+          question: "How accurate is the dunk calculator?",
+          answer: "Our calculator uses proven physics formulas and has been validated against real-world data from thousands of athletes. The calculations are accurate within 2-3 inches for most users."
+        },
+        {
+          question: "What measurements do I need?",
+          answer: "You need your height, standing reach (how high you can reach with one arm), desired rim height, and how much clearance you want above the rim."
+        },
+        {
+          question: "How long does it take to increase vertical jump?",
+          answer: "Most athletes see 4-8 inch improvements in 3-6 months with consistent training. Elite gains of 10+ inches typically take 12-18 months of dedicated work."
+        }
+      ])
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Schema Markup for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "Dunk Calculator",
-            "applicationCategory": "Sports & Fitness",
-            "description": "Professional basketball dunk calculator with physics-based calculations, interactive visualizations, and comprehensive training resources",
-            "url": "https://dunk-calculator.info",
-            "screenshot": "https://dunk-calculator.info/images/calculator-screenshot.jpg",
-            "author": {
-              "@type": "Organization",
-              "name": "Basketball Performance Analytics"
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "reviewCount": "2847"
-            },
-            "featureList": [
-              "Physics-based vertical jump calculations",
-              "Interactive jump visualization",
-              "Multiple calculator types",
-              "Training program recommendations",
-              "Performance analytics",
-              "Mobile-responsive design"
-            ]
-          })
-        }}
-      />
-      
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "How accurate is the dunk calculator?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Our calculator uses proven physics formulas and has been validated against real-world data from thousands of athletes. The calculations are accurate within 2-3 inches for most users."
-                }
-              },
-              {
-                "@type": "Question", 
-                "name": "What measurements do I need?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "You need your height, standing reach (how high you can reach with one arm), desired rim height, and how much clearance you want above the rim."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How long does it take to increase vertical jump?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Most athletes see 4-8 inch improvements in 3-6 months with consistent training. Elite gains of 10+ inches typically take 12-18 months of dedicated work."
-                }
-              }
-            ]
-          })
-        }}
-      />
+    <SEOPageLayout seoData={seoData} showHeader={false} className="bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -112,45 +82,62 @@ export default function Home() {
                   <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
                 </svg>
               </div>
-              <h1 className="text-xl font-bold text-gray-900">Dunk Calculator</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Dunk Calculator Pro</h1>
             </div>
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
               <button
                 onClick={() => scrollToSection('calculator')}
-                className="text-gray-700 hover:text-basketball-orange transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
+                aria-label="Navigate to calculator section"
               >
                 Calculator
               </button>
-              <Link href="/calculators" className="text-gray-700 hover:text-basketball-orange transition-colors">
+              <Link 
+                href="/calculators" 
+                className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
+                aria-label="View all calculator tools"
+              >
                 Tools
               </Link>
-              <Link href="/vertical-jump-training" className="text-gray-700 hover:text-basketball-orange transition-colors">
+              <Link 
+                href="/vertical-jump-training" 
+                className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
+                aria-label="Vertical jump training guides"
+              >
                 Training
               </Link>
-              <Link href="/athletic-performance" className="text-gray-700 hover:text-basketball-orange transition-colors">
+              <Link 
+                href="/athletic-performance" 
+                className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
+                aria-label="Athletic performance analysis"
+              >
                 Performance
               </Link>
               <button
                 onClick={() => scrollToSection('what-influences')}
-                className="text-gray-700 hover:text-basketball-orange transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
+                aria-label="Navigate to factors section"
               >
                 Factors
               </button>
               <button
                 onClick={() => scrollToSection('close-the-gap')}
-                className="text-gray-700 hover:text-basketball-orange transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
+                aria-label="Navigate to training section"
               >
                 Training
               </button>
               <button
                 onClick={() => scrollToSection('advanced-tools')}
-                className="text-gray-700 hover:text-basketball-orange transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
+                aria-label="Navigate to advanced tools section"
               >
                 Tools
               </button>
               <button
                 onClick={() => scrollToSection('faq')}
-                className="text-gray-700 hover:text-basketball-orange transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-basketball-orange transition-colors"
+                aria-label="Navigate to frequently asked questions"
               >
                 FAQ
               </button>
@@ -886,6 +873,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </SEOPageLayout>
   );
 }
