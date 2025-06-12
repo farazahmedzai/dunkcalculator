@@ -8,19 +8,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Weight, ArrowLeft, TrendingUp, Target } from "lucide-react";
+import { ArrowLeft, Weight, Target, TrendingUp, Clock } from "lucide-react";
 
 const idealWeightSchema = z.object({
   height: z.number().min(48).max(96),
   currentWeight: z.number().min(80).max(400),
-  currentVertical: z.number().min(6).max(50),
-  bodyFatPercentage: z.number().min(3).max(40).optional(),
-  gender: z.enum(["male", "female"]),
+  currentVertical: z.number().min(5).max(60),
   age: z.number().min(12).max(60),
+  gender: z.enum(["male", "female"]),
+  bodyFatPercentage: z.number().min(5).max(50).optional(),
   sport: z.enum(["basketball", "volleyball", "general"]),
   trainingGoal: z.enum(["power", "endurance", "balanced"]),
   muscleType: z.enum(["lean", "average", "muscular"]),
-  activityLevel: z.enum(["sedentary", "light", "moderate", "active", "very_active"]),
+  activityLevel: z.enum(["sedentary", "lightly_active", "active", "very_active"]),
 });
 
 type IdealWeightForm = z.infer<typeof idealWeightSchema>;
@@ -202,121 +202,6 @@ export default function IdealBodyWeightJumpCalculator() {
       setIsCalculating(false);
     }, 1000);
   };
-      
-      if (weightChange < 0) { // Weight loss
-        const fatLossComponent = (fatLossNeeded / 5) * 0.7; // Positive effect
-        const muscleLossRisk = Math.max(0, (-weightChange - fatLossNeeded) / 5) * -0.3; // Negative effect
-        verticalChange = fatLossComponent + muscleLossRisk;
-      } else { // Weight gain
-        const muscleGainComponent = (muscleGainNeeded / 5) * 0.4; // Moderate positive effect
-        const excessWeightPenalty = Math.max(0, (weightChange - muscleGainNeeded) / 5) * -0.2;
-        verticalChange = muscleGainComponent + excessWeightPenalty;
-      }
-      
-      const projectedVertical = data.currentVertical + verticalChange;
-      
-      // Calculate strength to weight ratio
-      const strengthToWeightRatio = (data.currentVertical * data.currentWeight) / 1000;
-      
-      // Time estimation (conservative)
-      let timeToReach = 6; // Base 6 months
-      if (Math.abs(weightChange) > 20) timeToReach = 12;
-      else if (Math.abs(weightChange) > 10) timeToReach = 8;
-      
-      if (data.age > 30) timeToReach *= 1.2;
-      if (muscleGainNeeded > 10) timeToReach *= 1.3;
-      
-      // Generate recommendations
-      const recommendations = [];
-      if (weightChange < -10) {
-        recommendations.push("Focus on gradual fat loss while preserving muscle mass");
-        recommendations.push("Maintain strength training throughout weight loss");
-        recommendations.push("Consider working with a sports nutritionist");
-      } else if (weightChange > 10) {
-        recommendations.push("Emphasize lean muscle gain through progressive strength training");
-        recommendations.push("Increase protein intake to support muscle growth");
-        recommendations.push("Monitor body composition, not just weight");
-      } else {
-        recommendations.push("You're close to optimal weight - focus on body composition");
-        recommendations.push("Prioritize strength and power development");
-        recommendations.push("Fine-tune nutrition for performance");
-      }
-      
-      if (data.currentVertical < 20) {
-        recommendations.push("Combine weight optimization with jump-specific training");
-      }
-      
-      // Nutrition guidelines
-      const nutritionGuidelines = [];
-      const proteinNeeds = idealWeight * 0.8; // grams per day
-      
-      if (weightChange < 0) {
-        nutritionGuidelines.push(`Target ${Math.round(proteinNeeds)} grams protein daily to preserve muscle`);
-        nutritionGuidelines.push("Create moderate caloric deficit of 300-500 calories daily");
-        nutritionGuidelines.push("Time carbohydrates around training sessions");
-        nutritionGuidelines.push("Maintain adequate fat intake for hormone production");
-      } else if (weightChange > 0) {
-        nutritionGuidelines.push(`Consume ${Math.round(proteinNeeds * 1.2)} grams protein daily for muscle growth`);
-        nutritionGuidelines.push("Eat in slight caloric surplus of 200-400 calories");
-        nutritionGuidelines.push("Focus on nutrient-dense, whole foods");
-        nutritionGuidelines.push("Stay hydrated and prioritize post-workout nutrition");
-      } else {
-        nutritionGuidelines.push("Maintain current caloric intake with improved food quality");
-        nutritionGuidelines.push(`Aim for ${Math.round(proteinNeeds)} grams protein daily`);
-        nutritionGuidelines.push("Focus on meal timing around training");
-      }
-      
-      // Training modifications
-      const trainingModifications = [];
-      if (fatLossNeeded > 5) {
-        trainingModifications.push("Add 2-3 cardio sessions per week");
-        trainingModifications.push("Increase training volume while monitoring recovery");
-        trainingModifications.push("Consider circuit training for conditioning");
-      }
-      
-      if (muscleGainNeeded > 5) {
-        trainingModifications.push("Emphasize heavy compound movements");
-        trainingModifications.push("Increase training frequency for major muscle groups");
-        trainingModifications.push("Allow adequate recovery between intense sessions");
-      }
-      
-      trainingModifications.push("Continue jump-specific plyometric training");
-      trainingModifications.push("Monitor strength-to-weight ratio improvements");
-      
-      // Risk factors
-      const riskFactors = [];
-      if (Math.abs(weightChange) > 15) {
-        riskFactors.push("Significant weight change - monitor health markers");
-      }
-      if (targetBodyFat < 8 && data.gender === "male") {
-        riskFactors.push("Very low body fat target - consider hormone impacts");
-      }
-      if (targetBodyFat < 12 && data.gender === "female") {
-        riskFactors.push("Low body fat target - monitor menstrual health");
-      }
-      if (data.age > 35 && Math.abs(weightChange) > 10) {
-        riskFactors.push("Age factor - prioritize gradual changes");
-      }
-
-      setResults({
-        idealWeight: Math.round(idealWeight * 10) / 10,
-        weightChange: Math.round(weightChange * 10) / 10,
-        projectedVertical: Math.round(projectedVertical * 10) / 10,
-        verticalChange: Math.round(verticalChange * 10) / 10,
-        bodyFatTarget: Math.round(targetBodyFat * 10) / 10,
-        muscleGainNeeded: Math.round(muscleGainNeeded * 10) / 10,
-        fatLossNeeded: Math.round(fatLossNeeded * 10) / 10,
-        timeToReach: Math.round(timeToReach),
-        strengthToWeightRatio: Math.round(strengthToWeightRatio * 100) / 100,
-        recommendations,
-        nutritionGuidelines,
-        trainingModifications,
-        riskFactors,
-      });
-      
-      setIsCalculating(false);
-    }, 1000);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
@@ -350,28 +235,29 @@ export default function IdealBodyWeightJumpCalculator() {
               <Weight className="w-8 h-8 text-green-600" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Ideal Body Weight Jump Calculator
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Find your optimal weight for maximum jumping performance with personalized body composition targets
+            Calculate your optimal body weight for maximum jumping performance and get personalized recommendations.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Calculator Form */}
-          <Card className="lg:col-span-2 bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+        <div className="grid lg:grid-cols-2 gap-8">
+          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
             <CardHeader>
-              <CardTitle className="text-2xl text-gray-900">Weight Optimization</CardTitle>
+              <CardTitle className="flex items-center space-x-2">
+                <Target className="w-5 h-5 text-green-600" />
+                <span>Body Composition Analysis</span>
+              </CardTitle>
               <CardDescription>
-                Calculate your ideal weight for jumping performance
+                Enter your current metrics to calculate your ideal weight for optimal jumping performance.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(calculateIdealWeight)} className="space-y-6">
-                  {/* Basic Info */}
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="height"
@@ -381,15 +267,16 @@ export default function IdealBodyWeightJumpCalculator() {
                           <FormControl>
                             <Input
                               type="number"
-                              placeholder="e.g., 72"
+                              placeholder="70"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value))}
+                              onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+
                     <FormField
                       control={form.control}
                       name="currentWeight"
@@ -399,15 +286,18 @@ export default function IdealBodyWeightJumpCalculator() {
                           <FormControl>
                             <Input
                               type="number"
-                              placeholder="e.g., 180"
+                              placeholder="170"
                               {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                              onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="currentVertical"
@@ -417,10 +307,28 @@ export default function IdealBodyWeightJumpCalculator() {
                           <FormControl>
                             <Input
                               type="number"
-                              step="0.5"
-                              placeholder="e.g., 24"
+                              placeholder="24"
                               {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                              onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="age"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Age</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="20"
+                              {...field}
+                              onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                             />
                           </FormControl>
                           <FormMessage />
@@ -429,8 +337,7 @@ export default function IdealBodyWeightJumpCalculator() {
                     />
                   </div>
 
-                  {/* Demographics */}
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="gender"
@@ -452,47 +359,7 @@ export default function IdealBodyWeightJumpCalculator() {
                         </FormItem>
                       )}
                     />
-                    <FormField
-                      control={form.control}
-                      name="age"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Age</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="e.g., 22"
-                              {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value))}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="bodyFatPercentage"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Body Fat % (Optional)</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              step="0.1"
-                              placeholder="e.g., 15"
-                              {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value))}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
 
-                  {/* Sport & Goals */}
-                  <div className="grid md:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="sport"
@@ -515,6 +382,9 @@ export default function IdealBodyWeightJumpCalculator() {
                         </FormItem>
                       )}
                     />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="trainingGoal"
@@ -529,58 +399,31 @@ export default function IdealBodyWeightJumpCalculator() {
                             </FormControl>
                             <SelectContent>
                               <SelectItem value="power">Maximum Power</SelectItem>
-                              <SelectItem value="endurance">Power Endurance</SelectItem>
-                              <SelectItem value="balanced">Balanced Performance</SelectItem>
+                              <SelectItem value="endurance">Endurance</SelectItem>
+                              <SelectItem value="balanced">Balanced</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                  </div>
 
-                  {/* Physical Characteristics */}
-                  <div className="grid md:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="muscleType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Muscle Type</FormLabel>
+                          <FormLabel>Current Build</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select type" />
+                                <SelectValue placeholder="Select build" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="lean">Lean/Ectomorphic</SelectItem>
-                              <SelectItem value="average">Average Build</SelectItem>
-                              <SelectItem value="muscular">Naturally Muscular</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="activityLevel"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Activity Level</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select level" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="sedentary">Sedentary</SelectItem>
-                              <SelectItem value="light">Light Activity</SelectItem>
-                              <SelectItem value="moderate">Moderate Activity</SelectItem>
-                              <SelectItem value="active">Active</SelectItem>
-                              <SelectItem value="very_active">Very Active</SelectItem>
+                              <SelectItem value="lean">Lean</SelectItem>
+                              <SelectItem value="average">Average</SelectItem>
+                              <SelectItem value="muscular">Muscular</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -589,182 +432,121 @@ export default function IdealBodyWeightJumpCalculator() {
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3"
+                  <FormField
+                    control={form.control}
+                    name="bodyFatPercentage"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Body Fat % (optional)</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            placeholder="15"
+                            {...field}
+                            onChange={(e) => field.onChange(parseFloat(e.target.value) || undefined)}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-green-600 hover:bg-green-700" 
                     disabled={isCalculating}
                   >
                     {isCalculating ? "Calculating..." : "Calculate Ideal Weight"}
+                    <Weight className="w-4 h-4 ml-2" />
                   </Button>
                 </form>
               </Form>
             </CardContent>
           </Card>
 
-          {/* Results */}
           {results && (
-            <div className="space-y-6">
-              {/* Target Weight */}
-              <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-green-700">
-                    <Target className="w-5 h-5 mr-2" />
-                    Optimal Weight
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600 mb-2">
-                      {results.idealWeight} lbs
-                    </div>
-                    <div className="text-lg text-gray-700 mb-4">
-                      Target Weight
-                    </div>
-                    <div className={`text-lg font-semibold ${results.weightChange > 0 ? 'text-blue-600' : 'text-red-600'}`}>
-                      {results.weightChange > 0 ? '+' : ''}{results.weightChange} lbs change
+            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <TrendingUp className="w-5 h-5 text-blue-600" />
+                  <span>Weight Optimization Results</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="text-center p-6 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg">
+                    <div className="text-3xl font-bold">{results.idealWeight} lbs</div>
+                    <div className="text-sm opacity-90">Ideal Weight</div>
+                    <div className="text-sm mt-2">
+                      {results.weightChange > 0 ? '+' : ''}{results.weightChange} lbs change needed
                     </div>
                   </div>
-                  
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-gray-50 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-gray-900">{results.projectedVertical}"</div>
+                      <div className="text-sm text-gray-600">Projected Vertical</div>
+                      <div className="text-xs text-green-600">+{results.verticalChange}" improvement</div>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-gray-900">{results.timeToReach}</div>
+                      <div className="text-sm text-gray-600">Weeks to Reach</div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-blue-50 p-4 rounded-lg text-center">
+                      <div className="text-lg font-bold text-blue-900">{results.muscleGainNeeded} lbs</div>
+                      <div className="text-sm text-blue-600">Muscle to Gain</div>
+                    </div>
+                    <div className="bg-red-50 p-4 rounded-lg text-center">
+                      <div className="text-lg font-bold text-red-900">{results.fatLossNeeded} lbs</div>
+                      <div className="text-sm text-red-600">Fat to Lose</div>
+                    </div>
+                  </div>
+
                   <div className="bg-green-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-green-800 mb-2">Body Composition Target</h4>
-                    <p className="text-sm text-green-700">{results.bodyFatTarget}% body fat</p>
+                    <h4 className="font-semibold text-green-900 mb-2">Recommendations</h4>
+                    <ul className="text-green-800 space-y-1">
+                      {results.recommendations.map((rec, index) => (
+                        <li key={index} className="text-sm">• {rec}</li>
+                      ))}
+                    </ul>
                   </div>
-                </CardContent>
-              </Card>
 
-              {/* Projected Performance */}
-              <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-blue-700">
-                    <TrendingUp className="w-5 h-5 mr-2" />
-                    Performance Impact
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600 mb-2">
-                      {results.projectedVertical}"
-                    </div>
-                    <div className="text-sm text-gray-600 mb-4">
-                      Projected Vertical Jump
-                    </div>
-                    <div className={`text-lg font-semibold ${results.verticalChange > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                      {results.verticalChange > 0 ? '+' : ''}{results.verticalChange}" change
-                    </div>
-                  </div>
-                  
                   <div className="bg-blue-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-blue-800 mb-2">Timeline</h4>
-                    <p className="text-sm text-blue-700">{results.timeToReach} months to reach target</p>
+                    <h4 className="font-semibold text-blue-900 mb-2">Nutrition Guidelines</h4>
+                    <ul className="text-blue-800 space-y-1">
+                      {results.nutritionGuidelines.map((guide, index) => (
+                        <li key={index} className="text-sm">• {guide}</li>
+                      ))}
+                    </ul>
                   </div>
-                </CardContent>
-              </Card>
 
-              {/* Body Composition */}
-              <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-gray-800">Body Composition Changes</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {results.muscleGainNeeded > 0 && (
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Muscle Gain Needed:</span>
-                      <span className="font-semibold text-green-600">+{results.muscleGainNeeded} lbs</span>
-                    </div>
-                  )}
-                  {results.fatLossNeeded > 0 && (
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Fat Loss Needed:</span>
-                      <span className="font-semibold text-red-600">-{results.fatLossNeeded} lbs</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Strength/Weight Ratio:</span>
-                    <span className="font-semibold text-purple-600">{results.strengthToWeightRatio}</span>
+                  <div className="bg-purple-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-purple-900 mb-2">Training Modifications</h4>
+                    <ul className="text-purple-800 space-y-1">
+                      {results.trainingModifications.map((mod, index) => (
+                        <li key={index} className="text-sm">• {mod}</li>
+                      ))}
+                    </ul>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+
+                  {results.riskFactors.length > 0 && (
+                    <div className="bg-yellow-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-yellow-900 mb-2">Risk Factors</h4>
+                      <ul className="text-yellow-800 space-y-1">
+                        {results.riskFactors.map((risk, index) => (
+                          <li key={index} className="text-sm">• {risk}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           )}
         </div>
-
-        {/* Detailed Recommendations */}
-        {results && (
-          <div className="mt-12 grid md:grid-cols-2 gap-8">
-            {/* Nutrition */}
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-gray-800">Nutrition Guidelines</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {results.nutritionGuidelines.map((guideline, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-sm text-gray-700">{guideline}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Training */}
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-gray-800">Training Modifications</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {results.trainingModifications.map((mod, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-sm text-gray-700">{mod}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {/* Recommendations & Risks */}
-        {results && (
-          <div className="mt-8 grid md:grid-cols-2 gap-8">
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-gray-800">General Recommendations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {results.recommendations.map((rec, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-sm text-gray-700">{rec}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-
-            {results.riskFactors.length > 0 && (
-              <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-yellow-800">Important Considerations</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {results.riskFactors.map((risk, index) => (
-                      <li key={index} className="flex items-start">
-                        <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                        <span className="text-sm text-gray-700">{risk}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );

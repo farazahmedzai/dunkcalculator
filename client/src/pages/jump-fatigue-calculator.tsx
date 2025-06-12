@@ -8,13 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Zap, ArrowLeft, AlertTriangle, TrendingDown } from "lucide-react";
+import { ArrowLeft, Zap, TrendingDown, Clock, AlertTriangle } from "lucide-react";
 
 const jumpFatigueSchema = z.object({
-  restingJump: z.number().min(8).max(50),
-  fatigueJump: z.number().min(4).max(50),
-  activityType: z.enum(["game", "practice", "workout", "tournament"]),
-  durationMinutes: z.number().min(10).max(240),
+  restingJump: z.number().min(5).max(60),
+  fatigueJump: z.number().min(5).max(60),
+  activityType: z.enum(["practice", "game", "training", "testing"]),
+  durationMinutes: z.number().min(15).max(300),
   intensityLevel: z.enum(["low", "moderate", "high", "maximal"]),
   restTime: z.number().min(0).max(60),
   bodyWeight: z.number().min(80).max(400).optional(),
@@ -200,13 +200,14 @@ export default function JumpFatigueCalculator() {
                               type="number"
                               placeholder="28"
                               {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                              onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+
                     <FormField
                       control={form.control}
                       name="fatigueJump"
@@ -218,7 +219,7 @@ export default function JumpFatigueCalculator() {
                               type="number"
                               placeholder="24"
                               {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                              onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                             />
                           </FormControl>
                           <FormMessage />
@@ -243,14 +244,15 @@ export default function JumpFatigueCalculator() {
                             <SelectContent>
                               <SelectItem value="practice">Practice</SelectItem>
                               <SelectItem value="game">Game</SelectItem>
-                              <SelectItem value="workout">Workout</SelectItem>
-                              <SelectItem value="tournament">Tournament</SelectItem>
+                              <SelectItem value="training">Training</SelectItem>
+                              <SelectItem value="testing">Testing</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+
                     <FormField
                       control={form.control}
                       name="durationMinutes"
@@ -262,7 +264,7 @@ export default function JumpFatigueCalculator() {
                               type="number"
                               placeholder="90"
                               {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                              onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                             />
                           </FormControl>
                           <FormMessage />
@@ -285,66 +287,49 @@ export default function JumpFatigueCalculator() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="low">Low</SelectItem>
-                              <SelectItem value="moderate">Moderate</SelectItem>
-                              <SelectItem value="high">High</SelectItem>
-                              <SelectItem value="maximal">Maximal</SelectItem>
+                              <SelectItem value="low">Low (Recovery)</SelectItem>
+                              <SelectItem value="moderate">Moderate (Training)</SelectItem>
+                              <SelectItem value="high">High (Competition)</SelectItem>
+                              <SelectItem value="maximal">Maximal (Testing)</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+
                     <FormField
                       control={form.control}
-                      name="restTime"
+                      name="fitnessLevel"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Rest Before Test (min)</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="5"
-                              {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value))}
-                            />
-                          </FormControl>
+                          <FormLabel>Fitness Level</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select level" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="beginner">Beginner</SelectItem>
+                              <SelectItem value="intermediate">Intermediate</SelectItem>
+                              <SelectItem value="advanced">Advanced</SelectItem>
+                              <SelectItem value="elite">Elite</SelectItem>
+                            </SelectContent>
+                          </Select>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
                   </div>
 
-                  <FormField
-                    control={form.control}
-                    name="fitnessLevel"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Fitness Level</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select fitness level" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="beginner">Beginner</SelectItem>
-                            <SelectItem value="intermediate">Intermediate</SelectItem>
-                            <SelectItem value="advanced">Advanced</SelectItem>
-                            <SelectItem value="elite">Elite</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
                   <Button 
                     type="submit" 
+                    className="w-full bg-red-600 hover:bg-red-700" 
                     disabled={isCalculating}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white h-12"
                   >
-                    {isCalculating ? "Analyzing Fatigue..." : "Calculate Fatigue Impact"}
+                    {isCalculating ? "Analyzing..." : "Analyze Fatigue"}
+                    <Zap className="w-4 h-4 ml-2" />
                   </Button>
                 </form>
               </Form>
@@ -352,57 +337,58 @@ export default function JumpFatigueCalculator() {
           </Card>
 
           {results && (
-            <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-xl">
+            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                  <AlertTriangle className="w-5 h-5 text-orange-600" />
                   <span>Fatigue Analysis Results</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-red-50 rounded-lg">
-                    <div className="text-2xl font-bold text-red-600">{results.fatigueIndex}%</div>
-                    <div className="text-sm text-gray-600">Fatigue Index</div>
-                  </div>
-                  <div className="text-center p-4 bg-orange-50 rounded-lg">
-                    <div className="text-2xl font-bold text-orange-600">{results.recoveryTime}min</div>
-                    <div className="text-sm text-gray-600">Recovery Time</div>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Fatigue Level</h4>
-                    <p className="text-gray-700">{results.fatigueLevel}</p>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="text-center p-6 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-lg">
+                    <div className="text-3xl font-bold">{results.fatigueIndex}%</div>
+                    <div className="text-sm opacity-90">Fatigue Index</div>
+                    <div className="text-sm mt-2">{results.fatigueLevel}</div>
                   </div>
 
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Fatigue Type</h4>
-                    <p className="text-gray-700">{results.fatigueType}</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-gray-50 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-gray-900">{results.performanceDrop}%</div>
+                      <div className="text-sm text-gray-600">Performance Drop</div>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-gray-900">{results.recoveryTime}h</div>
+                      <div className="text-sm text-gray-600">Recovery Time</div>
+                    </div>
                   </div>
 
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Recommendations</h4>
-                    <ul className="list-disc list-inside space-y-1 text-gray-700">
-                      {results.recommendations.map((rec, index) => (
-                        <li key={index}>{rec}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Training Adjustments</h4>
-                    <ul className="list-disc list-inside space-y-1 text-gray-700">
-                      {results.trainingAdjustments.map((adj, index) => (
-                        <li key={index}>{adj}</li>
-                      ))}
-                    </ul>
+                  <div className="bg-orange-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-orange-900 mb-2">Fatigue Type</h4>
+                    <p className="text-orange-800">{results.fatigueType}</p>
                   </div>
 
                   <div className="bg-blue-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">Next Test</h4>
-                    <p className="text-blue-800">{results.nextTestTime}</p>
+                    <h4 className="font-semibold text-blue-900 mb-2">Recommendations</h4>
+                    <ul className="text-blue-800 space-y-1">
+                      {results.recommendations.map((rec, index) => (
+                        <li key={index} className="text-sm">• {rec}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-green-900 mb-2">Training Adjustments</h4>
+                    <ul className="text-green-800 space-y-1">
+                      {results.trainingAdjustments.map((adj, index) => (
+                        <li key={index} className="text-sm">• {adj}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="bg-purple-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-purple-900 mb-2">Next Test</h4>
+                    <p className="text-purple-800">{results.nextTestTime}</p>
                   </div>
                 </div>
               </CardContent>
