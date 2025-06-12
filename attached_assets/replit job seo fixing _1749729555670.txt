@@ -1,0 +1,142 @@
+
+Do it one by one do not miss any thing 
+
+Full On-Page SEO Instruction to AI Agent
+Objective:
+Scan and fix all issues affecting SEO, user experience, and site performance across the entire website. Prioritize technical accuracy, content relevance, and search visibility.
+
+✅ Core Fixes & Checks
+1. Breadcrumb Navigation
+Detect and resolve broken or inconsistent breadcrumbs.
+
+Ensure semantic hierarchy (e.g., Home > Category > Subcategory > Page).
+
+Implement BreadcrumbList schema using JSON-LD.
+
+2. Schema Markup (Structured Data)
+Audit all pages for valid structured data.
+
+Add or fix schema types:
+
+Article, Product, FAQPage, HowTo, WebPage, BreadcrumbList, LocalBusiness, Organization, Review, Event, etc.
+
+Remove deprecated or conflicting schema.
+
+Validate via Google Rich Results Test.
+
+3. Broken Links
+Identify all 404 and unnecessary redirects (internal & external).
+
+Replace, update, or remove broken links.
+
+Ensure anchor text is relevant and not over-optimized.
+
+4. Broken Routes / Routers
+Detect and fix broken or misconfigured routes (e.g., Next.js, React, Vue).
+
+Ensure all pages resolve properly with fallback handling (404 pages).
+
+5. Internal Linking Optimization
+Strengthen internal linking structure.
+
+Link key pages contextually using varied anchor text.
+
+Eliminate orphan pages and reduce unnecessary deep links.
+
+6. Full Page Schema Coverage
+Ensure every page includes relevant structured data.
+
+Support multiple schema types per page where applicable.
+
+Auto-detect content types and apply matching schema.
+
+⚙️ Additional Essential On-Page SEO Checks
+7. Title Tag Optimization
+Ensure each page has a unique, concise, keyword-rich <title>.
+
+Limit to 50–60 characters.
+
+8. Meta Description Optimization
+Write unique, engaging meta descriptions (140–160 characters).
+
+Include a call to action and main keywords.
+
+9. Heading Structure (H1–H6)
+Only one <h1> per page.
+
+Maintain logical heading hierarchy (H1 > H2 > H3…).
+
+Avoid skipping heading levels or using headings for styling.
+
+10. Image Optimization
+Add descriptive alt tags and filenames.
+
+Compress images (preferably WebP).
+
+Use lazy loading and responsive srcset.
+
+11. Content Quality & Relevance
+Ensure all content is original, helpful, and well-structured.
+
+Cover subtopics thoroughly.
+
+Break up large sections using headers, lists, and visuals.
+
+12. Keyword Usage & Placement
+Use primary keywords naturally in:
+
+Title, URL, H1, intro paragraph, and body content.
+
+Include LSI (related) keywords where relevant.
+
+13. URL Optimization
+Use clean, readable URLs with hyphens.
+
+Keep short and keyword-relevant.
+
+Avoid query strings and stop words.
+
+14. Anchor Text Optimization
+Vary anchor text styles (branded, partial match, natural).
+
+Avoid repetitive exact-match phrases.
+
+15. Mobile Responsiveness
+Ensure design adapts across all devices.
+
+Pass Google’s Mobile-Friendly Test.
+
+Avoid clickable elements that are too close together.
+
+16. Readability & Accessibility
+Use high contrast, clear fonts, and accessible designs.
+
+Maintain a user-friendly reading level.
+
+Add ARIA labels and screen reader support where needed.
+
+17. Canonical Tags
+Add canonical URLs to avoid duplicate content.
+
+Validate correctness on paginated or dynamic URLs.
+
+18. Page Depth & Crawlability
+Keep key pages within 3 clicks of the homepage.
+
+Flatten deep folder structures where possible.
+
+Ensure XML sitemaps are accurate and up to date.
+
+Bonus: Optional Enhancements
+Add Open Graph and Twitter Card tags.
+
+Check favicon and browser metadata.
+
+Set up proper 404 and custom error pages.
+
+Use schema-enhanced breadcrumbs and navigation menus.
+
+Include structured FAQs or How-Tos where relevant.
+
+🎯 Final Goal:
+Make the website clean, fast, fully crawlable, and optimized for search engines and real users. Everything should pass technical SEO audits, improve visibility, and enhance the overall user experience.
