@@ -12,6 +12,8 @@ import {
   Users,
   BarChart3
 } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateArticleSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
 
 const heightRequirements = [
   {

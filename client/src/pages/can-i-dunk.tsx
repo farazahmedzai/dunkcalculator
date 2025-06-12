@@ -12,6 +12,8 @@ import {
   AlertTriangle,
   Ruler
 } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateArticleSchema, generateWebPageSchema, generateFAQSchema, BreadcrumbItem } from "@/lib/seo";
 
 export default function CanIDunk() {
   const scrollToSection = (sectionId: string) => {

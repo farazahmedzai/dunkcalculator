@@ -19,6 +19,8 @@ import {
 import PageHeader from "@/components/shared/page-header";
 import DunkCard from "@/components/shared/dunk-card";
 import { getDunkByName } from "@/components/shared/dunk-types-data";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateHowToSchema, generateArticleSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
 
 export default function HowToDunkABasketball() {
   const scrollToSection = (sectionId: string) => {

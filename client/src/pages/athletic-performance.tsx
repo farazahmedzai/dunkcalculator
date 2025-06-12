@@ -16,6 +16,8 @@ import {
   Lightbulb,
   FileText
 } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateArticleSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
 
 export default function AthleticPerformance() {
   const scrollToSection = (sectionId: string) => {
@@ -25,38 +27,40 @@ export default function AthleticPerformance() {
     }
   };
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Athletic Performance', url: '/athletic-performance' }
+  ];
+
+  const seoData = {
+    title: "Athletic Performance Analysis - Basketball Science & Biomechanics | Dunk Calculator Pro",
+    description: "Advanced athletic performance analysis for basketball players. Biomechanics optimization, performance metrics, recovery strategies, and elite athlete protocols for maximizing basketball performance.",
+    keywords: "athletic performance analysis, basketball biomechanics, sports performance science, basketball training science, athletic optimization, performance metrics, sports analytics",
+    canonicalUrl: `${window.location.origin}/athletic-performance`,
+    ogTitle: "Athletic Performance Analysis - Basketball Science & Biomechanics",
+    ogDescription: "Advanced athletic performance analysis for basketball players. Biomechanics optimization, performance metrics, and elite athlete protocols.",
+    twitterTitle: "Athletic Performance Analysis - Basketball Science & Biomechanics",
+    twitterDescription: "Advanced athletic performance analysis and biomechanics optimization for basketball players and elite athletes.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateArticleSchema(
+        "Athletic Performance Analysis for Basketball Players",
+        "Comprehensive guide to athletic performance analysis covering biomechanics optimization, performance metrics, recovery strategies, and elite athlete protocols for basketball players.",
+        new Date().toISOString(),
+        new Date().toISOString(),
+        "Dunk Calculator Pro Performance Team",
+        `${window.location.origin}/athletic-performance`
+      ),
+      generateWebPageSchema(
+        "Athletic Performance Analysis - Basketball Science & Biomechanics",
+        "Advanced athletic performance analysis for basketball players. Biomechanics optimization, performance metrics, recovery strategies, and elite athlete protocols for maximizing basketball performance.",
+        `${window.location.origin}/athletic-performance`
+      )
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center">
-                <div className="w-8 h-8 bg-basketball-orange rounded-full flex items-center justify-center mr-3">
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none"/>
-                    <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="1"/>
-                  </svg>
-                </div>
-                <span className="text-xl font-bold text-gray-900">Dunk Calculator</span>
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Calculator
-              </Link>
-              <Link href="/calculators" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Tools
-              </Link>
-              <Link href="/vertical-jump-training" className="text-gray-700 hover:text-basketball-orange transition-colors">
-                Training
-              </Link>
-              <span className="text-basketball-orange font-semibold">Performance</span>
-            </nav>
-          </div>
-        </div>
-      </header>
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Athletic Performance" className="bg-gray-50 dark:bg-gray-900">
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-16">
@@ -701,6 +705,6 @@ export default function AthleticPerformance() {
           </div>
         </div>
       </section>
-    </div>
+    </SEOPageLayout>
   );
 }
