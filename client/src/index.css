@@ -166,22 +166,42 @@ button {
 
 /* Fix outline buttons on gradient backgrounds */
 button[data-variant="outline"] {
-  background-color: transparent !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(4px) !important;
   border: 2px solid !important;
 }
 
-/* Ensure white text buttons are visible */
-.text-white {
+/* Ensure white text buttons are visible on any background */
+.text-white, 
+button.text-white,
+button .text-white {
   color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Ensure dark text buttons are visible */
-.text-gray-900, .text-black {
+.text-gray-900, 
+.text-black,
+button.text-gray-900,
+button .text-gray-900 {
   color: #111827 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Force button text visibility regardless of parent */
 button * {
+  color: inherit !important;
+}
+
+/* Specific fix for buttons on gradient backgrounds */
+button[style*="background"] {
+  color: inherit !important;
+}
+
+/* Override any conflicting styles */
+.bg-gradient-to-r button,
+.bg-gradient-to-br button,
+.bg-gradient-to-bl button {
   color: inherit !important;
 }
 
