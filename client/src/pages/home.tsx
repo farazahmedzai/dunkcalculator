@@ -644,7 +644,7 @@ export default function Home() {
                 </div>
                 <p className="text-gray-600 mb-4">Track how fatigue affects your jumping performance and optimize training recovery.</p>
                 <Link href="/calculators/jump-fatigue-calculator">
-                  <Button variant="outline" className="w-full">Calculate Now</Button>
+                  <Button className="w-full border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white font-semibold">Calculate Now</Button>
                 </Link>
               </CardContent>
             </Card>
@@ -661,7 +661,7 @@ export default function Home() {
                 </div>
                 <p className="text-gray-600 mb-4">Discover your theoretical maximum vertical jump based on body type and training potential.</p>
                 <Link href="/calculators/max-potential-jump-calculator">
-                  <Button variant="outline" className="w-full">Calculate Now</Button>
+                  <Button className="w-full border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white font-semibold">Calculate Now</Button>
                 </Link>
               </CardContent>
             </Card>
@@ -678,7 +678,7 @@ export default function Home() {
                 </div>
                 <p className="text-gray-600 mb-4">Calculate optimal body weight for maximum jumping performance and power-to-weight ratio.</p>
                 <Link href="/calculators/ideal-body-weight-jump-calculator">
-                  <Button variant="outline" className="w-full">Calculate Now</Button>
+                  <Button className="w-full border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white font-semibold">Calculate Now</Button>
                 </Link>
               </CardContent>
             </Card>

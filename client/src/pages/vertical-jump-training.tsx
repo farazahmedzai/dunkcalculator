@@ -361,7 +361,7 @@ export default function VerticalJumpTraining() {
                     <Badge variant="secondary">25 variations</Badge>
                   </div>
                 </div>
-                <Button className="w-full mt-4" variant="outline">
+                <Button className="w-full mt-4 border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white font-semibold">
                   View Strength Work
                 </Button>
               </CardContent>
@@ -397,7 +397,7 @@ export default function VerticalJumpTraining() {
                     <Badge variant="secondary">18 protocols</Badge>
                   </div>
                 </div>
-                <Button className="w-full mt-4" variant="outline">
+                <Button className="w-full mt-4 border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white font-semibold">
                   View Mobility Work
                 </Button>
               </CardContent>
@@ -585,9 +585,7 @@ export default function VerticalJumpTraining() {
             </Link>
             <Link href="/calculators">
               <Button 
-                variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3"
-                style={{ color: 'white', backgroundColor: 'transparent', borderColor: 'white' }}
+                className="border-2 border-white bg-black/30 backdrop-blur-sm text-white hover:bg-white hover:text-orange-600 px-8 py-3 font-semibold shadow-lg"
               >
                 Browse All Tools
               </Button>

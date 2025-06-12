@@ -252,7 +252,7 @@ export default function Calculators() {
               </Button>
             </Link>
             <Link href="/athletic-performance">
-              <Button size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white hover:text-gray-900 font-semibold" style={{ color: 'white', backgroundColor: 'transparent', borderColor: 'white' }}>
+              <Button size="lg" className="border-2 border-white bg-black/30 backdrop-blur-sm text-white hover:bg-white hover:text-gray-900 font-semibold shadow-lg">
                 Learn Performance Science
               </Button>
             </Link>

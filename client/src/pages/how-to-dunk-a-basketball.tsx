@@ -721,8 +721,7 @@ export default function HowToDunkABasketball() {
             </Link>
             <Link href="/vertical-jump-training">
               <Button 
-                variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3"
+                className="border-2 border-white bg-black/30 backdrop-blur-sm text-white hover:bg-white hover:text-orange-600 px-8 py-3 font-semibold shadow-lg"
               >
                 View Training Programs
               </Button>
