@@ -118,10 +118,8 @@ export default function JumpFatigueCalculator() {
         trainingAdjustments.push("Good recovery between sessions");
       }
 
-      let nextTestTime = "";
-      if (fatigueIndex < 10) nextTestTime = "48-72 hours for progress monitoring";
-      else if (fatigueIndex < 20) nextTestTime = "24-48 hours to track recovery";
-      else nextTestTime = "12-24 hours to ensure adequate recovery";
+      const nextTestTime = new Date();
+      nextTestTime.setHours(nextTestTime.getHours() + recoveryTime);
 
       setResults({
         fatigueIndex: Math.round(fatigueIndex * 10) / 10,
@@ -131,11 +129,11 @@ export default function JumpFatigueCalculator() {
         fatigueType,
         recommendations,
         trainingAdjustments,
-        nextTestTime,
+        nextTestTime: nextTestTime.toLocaleString(),
       });
       
       setIsCalculating(false);
-    }, 700);
+    }, 800);
   };
 
   return (

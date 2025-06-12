@@ -118,9 +118,90 @@ export default function IdealBodyWeightJumpCalculator() {
       const muscleGainNeeded = Math.max(0, targetLeanMass - currentLeanMass);
       
       // Project vertical jump improvement
-      // Research shows ~0.5-1 inch gain per 5 lbs of optimal weight loss
-      // And potential loss of 0.2-0.4 inches per 5 lbs if losing muscle
-      let verticalChange = 0;
+      const currentPowerToWeight = data.currentVertical / data.currentWeight;
+      const projectedPowerToWeight = currentPowerToWeight * (idealWeight / data.currentWeight);
+      const projectedVertical = projectedPowerToWeight * idealWeight;
+      const verticalChange = projectedVertical - data.currentVertical;
+
+      // Calculate strength to weight ratio
+      const strengthToWeightRatio = (data.currentVertical * data.currentWeight) / 1000;
+
+      // Time to reach calculation
+      const weightChangeRate = Math.abs(weightChange) <= 20 ? 1 : 1.5; // lbs per week
+      const timeToReach = Math.abs(weightChange) / weightChangeRate;
+
+      // Generate recommendations
+      const recommendations = [];
+      if (weightChange > 10) {
+        recommendations.push("Focus on lean muscle gain through resistance training");
+        recommendations.push("Increase protein intake to 1.2-1.6g per pound of body weight");
+        recommendations.push("Progressive overload in compound movements");
+      } else if (weightChange < -10) {
+        recommendations.push("Create moderate caloric deficit (300-500 calories)");
+        recommendations.push("Maintain high protein intake to preserve muscle mass");
+        recommendations.push("Combine strength training with moderate cardio");
+      } else {
+        recommendations.push("Body composition optimization rather than weight change");
+        recommendations.push("Focus on improving power-to-weight ratio");
+        recommendations.push("Emphasize explosive movement training");
+      }
+
+      // Nutrition guidelines
+      const nutritionGuidelines = [];
+      if (muscleGainNeeded > 5) {
+        nutritionGuidelines.push("Slight caloric surplus (200-300 calories above maintenance)");
+        nutritionGuidelines.push("Time protein intake around workouts");
+        nutritionGuidelines.push("Prioritize complex carbohydrates for energy");
+      }
+      if (fatLossNeeded > 5) {
+        nutritionGuidelines.push("Moderate caloric deficit while preserving muscle");
+        nutritionGuidelines.push("Higher protein intake during fat loss phase");
+        nutritionGuidelines.push("Strategic carb timing around training");
+      }
+
+      // Training modifications
+      const trainingModifications = [];
+      if (data.trainingGoal === "power") {
+        trainingModifications.push("Emphasize explosive movements and plyometrics");
+        trainingModifications.push("Lower rep ranges (3-6) for strength");
+        trainingModifications.push("Focus on compound movements");
+      } else if (data.trainingGoal === "endurance") {
+        trainingModifications.push("Higher volume training with moderate weights");
+        trainingModifications.push("Circuit training for conditioning");
+        trainingModifications.push("Progressive overload in endurance metrics");
+      }
+
+      // Risk factors
+      const riskFactors = [];
+      if (Math.abs(weightChange) > 30) {
+        riskFactors.push("Large weight change may affect performance temporarily");
+      }
+      if (targetBodyFat < (data.gender === "male" ? 8 : 15)) {
+        riskFactors.push("Very low body fat may impact hormone production");
+      }
+      if (timeToReach > 52) {
+        riskFactors.push("Extended timeline may affect motivation and consistency");
+      }
+
+      setResults({
+        idealWeight: Math.round(idealWeight * 10) / 10,
+        weightChange: Math.round(weightChange * 10) / 10,
+        projectedVertical: Math.round(projectedVertical * 10) / 10,
+        verticalChange: Math.round(verticalChange * 10) / 10,
+        bodyFatTarget: targetBodyFat,
+        muscleGainNeeded: Math.round(muscleGainNeeded * 10) / 10,
+        fatLossNeeded: Math.round(fatLossNeeded * 10) / 10,
+        timeToReach: Math.round(timeToReach),
+        strengthToWeightRatio: Math.round(strengthToWeightRatio * 100) / 100,
+        recommendations,
+        nutritionGuidelines,
+        trainingModifications,
+        riskFactors,
+      });
+      
+      setIsCalculating(false);
+    }, 1000);
+  };
       
       if (weightChange < 0) { // Weight loss
         const fatLossComponent = (fatLossNeeded / 5) * 0.7; // Positive effect

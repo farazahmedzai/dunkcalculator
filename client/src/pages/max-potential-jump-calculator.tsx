@@ -124,11 +124,81 @@ export default function MaxPotentialJumpCalculator() {
         none: 1.0,
         minor: 0.95,
         moderate: 0.85,
-        significant: 0.7
+        severe: 0.7
       };
 
-      // Calculate theoretical maximum
-      const gainPotential = Math.min(28, data.currentVertical * 0.8); // Max realistic gain
+      // Calculate potential gain
+      const totalFactor = ageFactor * 
+        experienceFactors[data.trainingExperience] * 
+        backgroundFactors[data.athleticBackground] * 
+        bodyTypeFactors[data.bodyType] * 
+        legLengthFactors[data.legLength] * 
+        fastTwitchFactors[data.fastTwitchDominance] * 
+        injuryFactors[data.injuryHistory];
+
+      const potentialGain = Math.min(24, basePotential * (totalFactor - 1));
+      const maxPotential = basePotential + potentialGain;
+      const currentGap = maxPotential - basePotential;
+      const percentageIncrease = (currentGap / basePotential) * 100;
+
+      // Time to reach calculation
+      const monthsPerInch = data.trainingExperience === "beginner" ? 1.5 : 
+                           data.trainingExperience === "intermediate" ? 2.0 : 3.0;
+      const timeToReach = Math.max(6, currentGap * monthsPerInch);
+
+      // Confidence level
+      let confidenceLevel = "";
+      if (totalFactor > 1.8) confidenceLevel = "Very High - Excellent genetic and training potential";
+      else if (totalFactor > 1.5) confidenceLevel = "High - Good combination of factors";
+      else if (totalFactor > 1.2) confidenceLevel = "Moderate - Realistic with consistent training";
+      else confidenceLevel = "Conservative - Limited by current factors";
+
+      // Limiting factors
+      const limitingFactors = [];
+      if (data.age > 30) limitingFactors.push("Age - Peak athletic years behind");
+      if (data.trainingExperience === "advanced") limitingFactors.push("Training plateau - Diminishing returns");
+      if (data.injuryHistory !== "none") limitingFactors.push("Injury history - Reduced capacity");
+      if (data.bodyType === "endomorph") limitingFactors.push("Body type - Less favorable for jumping");
+      if (data.fastTwitchDominance === "low") limitingFactors.push("Muscle fiber type - Limited explosive potential");
+
+      // Training phases
+      const trainingPhases = [
+        {
+          phase: "Foundation (Months 1-3)",
+          duration: "12 weeks",
+          focus: "Build base strength and movement quality",
+          expectedGain: currentGap * 0.3
+        },
+        {
+          phase: "Power Development (Months 4-8)",
+          duration: "20 weeks", 
+          focus: "Plyometrics and explosive strength",
+          expectedGain: currentGap * 0.4
+        },
+        {
+          phase: "Peak Performance (Months 9-12)",
+          duration: "16 weeks",
+          focus: "Sport-specific power and technique",
+          expectedGain: currentGap * 0.3
+        }
+      ];
+
+      setResults({
+        maxPotential: Math.round(maxPotential * 10) / 10,
+        currentGap: Math.round(currentGap * 10) / 10,
+        percentageIncrease: Math.round(percentageIncrease * 10) / 10,
+        timeToReach: Math.round(timeToReach),
+        confidenceLevel,
+        limitingFactors,
+        strengthAreas: ["Explosive leg strength", "Reactive ability", "Movement efficiency"],
+        trainingPhases,
+        geneticFactors: totalFactor > 1.5 ? "Above average genetic potential" : "Average genetic potential",
+        recommendations: ["Follow structured periodized training", "Focus on consistency over intensity", "Monitor progress monthly"]
+      });
+      
+      setIsCalculating(false);
+    }, 900);
+  };
       
       const maxPotential = basePotential + (
         gainPotential * 
