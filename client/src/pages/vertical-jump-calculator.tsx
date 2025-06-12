@@ -22,8 +22,8 @@ export default function VerticalJumpCalculator() {
   const [results, setResults] = useState<JumpResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  const form = useForm<VerticalJumpForm>({
-    resolver: zodResolver(verticalJumpSchema),
+  const form = useForm<VerticalJumpCalculatorForm>({
+    resolver: zodResolver(verticalJumpCalculatorSchema),
     defaultValues: {
       jumpMethod: "hangTime",
       bodyWeight: 170,
@@ -33,7 +33,7 @@ export default function VerticalJumpCalculator() {
 
   const watchMethod = form.watch("jumpMethod");
 
-  const calculateVerticalJump = (data: VerticalJumpForm) => {
+  const calculateVerticalJump = (data: VerticalJumpCalculatorForm) => {
     setIsCalculating(true);
     
     setTimeout(() => {

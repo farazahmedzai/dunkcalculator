@@ -1,29 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { maxPotentialCalculatorSchema, type MaxPotentialCalculatorForm } from "@/lib/validation-schemas";
 import { ArrowLeft, Target, TrendingUp, Clock, Star } from "lucide-react";
-
-const maxPotentialSchema = z.object({
-  currentVertical: z.number().min(5).max(60),
-  age: z.number().min(12).max(60),
-  trainingExperience: z.enum(["beginner", "intermediate", "advanced", "elite"]),
-  athleticBackground: z.enum(["none", "recreational", "high_school", "college", "professional"]),
-  bodyType: z.enum(["ectomorph", "mesomorph", "endomorph", "mixed"]),
-  legLength: z.enum(["short", "average", "long"]),
-  fastTwitchDominance: z.enum(["low", "moderate", "high", "unknown"]),
-  injuryHistory: z.enum(["none", "minor", "moderate", "severe"]),
-  trainingTime: z.number().min(3).max(60),
-  currentWeight: z.number().min(80).max(400),
-});
-
-type MaxPotentialForm = z.infer<typeof maxPotentialSchema>;
 
 interface PotentialResults {
   maxPotential: number;
@@ -47,7 +32,7 @@ export default function MaxPotentialJumpCalculator() {
   const [results, setResults] = useState<PotentialResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  const form = useForm<MaxPotentialForm>({
+  const form = useForm<MaxPotentialCalculatorForm>({
     resolver: zodResolver(maxPotentialSchema),
     defaultValues: {
       trainingExperience: "intermediate",

@@ -1,28 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { jumpFatigueCalculatorSchema, type JumpFatigueCalculatorForm } from "@/lib/validation-schemas";
 import { ArrowLeft, Zap, TrendingDown, Clock, AlertTriangle } from "lucide-react";
-
-const jumpFatigueSchema = z.object({
-  restingJump: z.number().min(5).max(60),
-  fatigueJump: z.number().min(5).max(60),
-  activityType: z.enum(["practice", "game", "training", "testing"]),
-  durationMinutes: z.number().min(15).max(300),
-  intensityLevel: z.enum(["low", "moderate", "high", "maximal"]),
-  restTime: z.number().min(0).max(60),
-  bodyWeight: z.number().min(80).max(400).optional(),
-  age: z.number().min(12).max(60).optional(),
-  fitnessLevel: z.enum(["beginner", "intermediate", "advanced", "elite"]).optional(),
-});
-
-type JumpFatigueForm = z.infer<typeof jumpFatigueSchema>;
 
 interface FatigueResults {
   fatigueIndex: number;
@@ -39,8 +25,8 @@ export default function JumpFatigueCalculator() {
   const [results, setResults] = useState<FatigueResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  const form = useForm<JumpFatigueForm>({
-    resolver: zodResolver(jumpFatigueSchema),
+  const form = useForm<JumpFatigueCalculatorForm>({
+    resolver: zodResolver(jumpFatigueCalculatorSchema),
     defaultValues: {
       activityType: "practice",
       intensityLevel: "moderate",
@@ -51,7 +37,7 @@ export default function JumpFatigueCalculator() {
     },
   });
 
-  const calculateFatigue = (data: JumpFatigueForm) => {
+  const calculateFatigue = (data: JumpFatigueCalculatorForm) => {
     setIsCalculating(true);
     
     setTimeout(() => {

@@ -1,24 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { jumpComparisonCalculatorSchema, type JumpComparisonCalculatorForm } from "@/lib/validation-schemas";
 import { Activity, ArrowLeft, BarChart, Target } from "lucide-react";
-
-const jumpComparisonSchema = z.object({
-  standingJump: z.number().min(0).max(60),
-  approachJump: z.number().min(0).max(60),
-  bodyWeight: z.number().min(80).max(400).optional(),
-  dominantLeg: z.enum(["left", "right"]),
-  experienceLevel: z.enum(["beginner", "intermediate", "advanced"]),
-  sport: z.enum(["basketball", "volleyball", "track", "general"]).optional(),
-});
-
-type JumpComparisonForm = z.infer<typeof jumpComparisonSchema>;
 
 interface ComparisonResults {
   approachAdvantage: number;
@@ -34,8 +23,8 @@ export default function ApproachVsStandingJumpCalculator() {
   const [results, setResults] = useState<ComparisonResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  const form = useForm<JumpComparisonForm>({
-    resolver: zodResolver(jumpComparisonSchema),
+  const form = useForm<JumpComparisonCalculatorForm>({
+    resolver: zodResolver(jumpComparisonCalculatorSchema),
     defaultValues: {
       dominantLeg: "right",
       experienceLevel: "intermediate",
@@ -44,7 +33,7 @@ export default function ApproachVsStandingJumpCalculator() {
     },
   });
 
-  const calculateComparison = (data: JumpComparisonForm) => {
+  const calculateComparison = (data: JumpComparisonCalculatorForm) => {
     setIsCalculating(true);
     
     setTimeout(() => {

@@ -1,26 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { standingReachCalculatorSchema, type StandingReachCalculatorForm } from "@/lib/validation-schemas";
 import { Calculator, ArrowLeft, Ruler, Target } from "lucide-react";
-
-const standingReachSchema = z.object({
-  calculationType: z.enum(["estimate", "verify"]),
-  height: z.number().min(48).max(96),
-  standingReach: z.number().min(48).max(120).optional(),
-  armSpan: z.number().min(48).max(120).optional(),
-  shoulderWidth: z.number().min(12).max(30).optional(),
-  gender: z.enum(["male", "female"]),
-  sport: z.enum(["basketball", "volleyball", "general"]).optional(),
-});
-
-type StandingReachForm = z.infer<typeof standingReachSchema>;
 
 interface ReachResults {
   estimatedReach: number;
