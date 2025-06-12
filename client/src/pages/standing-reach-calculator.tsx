@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { standingReachCalculatorSchema, type StandingReachCalculatorForm } from "@/lib/validation-schemas";
 import { Calculator, ArrowLeft, Ruler, Target } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateCalculatorSchema, generateWebPageSchema, BreadcrumbItem } from "@/lib/seo";
 
 interface ReachResults {
   estimatedReach: number;

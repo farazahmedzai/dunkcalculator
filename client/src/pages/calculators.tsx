@@ -2,6 +2,8 @@ import { Link } from "wouter";
 import { Calculator, TrendingUp, Target, Zap, Activity, Weight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateWebPageSchema, generateCalculatorSchema, BreadcrumbItem } from "@/lib/seo";
 
 const calculators = [
   {
@@ -73,29 +75,50 @@ const coreTools = calculators.filter(calc => calc.category === "Core Tools");
 const performanceTools = calculators.filter(calc => calc.category === "Performance & Progress Tools");
 
 export default function Calculators() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/">
-              <Button variant="ghost" className="text-orange-600 hover:text-orange-700">
-                ← Back to Dunk Calculator
-              </Button>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/vertical-jump-training" className="text-gray-600 hover:text-orange-600 transition-colors">
-                Training Programs
-              </Link>
-              <Link href="/athletic-performance" className="text-gray-600 hover:text-orange-600 transition-colors">
-                Performance Science
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators' }
+  ];
 
+  const seoData = {
+    title: "Basketball Jump & Dunk Calculators - Complete Performance Analysis Tools | Dunk Calculator Pro",
+    description: "Comprehensive basketball performance calculators to analyze vertical jump, dunk requirements, standing reach, fatigue, and more. Professional tools for athletes and trainers.",
+    keywords: "basketball calculators, vertical jump calculator, dunk calculator, standing reach calculator, jump fatigue calculator, basketball performance tools, athletic calculators",
+    canonicalUrl: `${window.location.origin}/calculators`,
+    ogTitle: "Basketball Jump & Dunk Calculators - Complete Performance Analysis Tools",
+    ogDescription: "Professional basketball performance calculators for vertical jump analysis, dunk requirements, and athletic optimization. Free tools for serious athletes.",
+    twitterTitle: "Basketball Jump & Dunk Calculators - Performance Analysis Tools",
+    twitterDescription: "Complete suite of basketball performance calculators. Analyze your vertical jump, dunk requirements, and optimize your training.",
+    twitterCard: "summary_large_image" as const,
+    structuredData: [
+      generateWebPageSchema(
+        "Basketball Jump & Dunk Calculators - Complete Performance Analysis Tools",
+        "Comprehensive basketball performance calculators to analyze vertical jump, dunk requirements, standing reach, fatigue, and more. Professional tools for athletes and trainers.",
+        `${window.location.origin}/calculators`
+      ),
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Basketball Performance Calculators",
+        "description": "Complete collection of basketball performance analysis tools and calculators",
+        "url": `${window.location.origin}/calculators`,
+        "mainEntity": {
+          "@type": "ItemList",
+          "numberOfItems": calculators.length,
+          "itemListElement": calculators.map((calc, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": calc.title,
+            "description": calc.description,
+            "url": `${window.location.origin}${calc.url}`
+          }))
+        }
+      }
+    ]
+  };
+
+  return (
+    <SEOPageLayout seoData={seoData} breadcrumbs={breadcrumbs} currentPage="Calculators" className="bg-gradient-to-br from-orange-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Main Header */}
         <div className="text-center mb-16">
@@ -236,6 +259,6 @@ export default function Calculators() {
           </div>
         </section>
       </div>
-    </div>
+    </SEOPageLayout>
   );
 }

@@ -14,6 +14,8 @@ import {
   BookOpen,
   Play
 } from "lucide-react";
+import SEOPageLayout from "@/components/shared/seo-page-layout";
+import { generateArticleSchema, generateWebPageSchema, generateHowToSchema, BreadcrumbItem } from "@/lib/seo";
 
 export default function VerticalJumpTraining() {
   const scrollToSection = (sectionId: string) => {
