@@ -23,8 +23,8 @@ export default function StandingReachCalculator() {
   const [results, setResults] = useState<ReachResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  const form = useForm<StandingReachForm>({
-    resolver: zodResolver(standingReachSchema),
+  const form = useForm<StandingReachCalculatorForm>({
+    resolver: zodResolver(standingReachCalculatorSchema),
     defaultValues: {
       calculationType: "estimate",
       gender: "male",
@@ -34,7 +34,7 @@ export default function StandingReachCalculator() {
 
   const watchType = form.watch("calculationType");
 
-  const calculateReach = (data: StandingReachForm) => {
+  const calculateReach = (data: StandingReachCalculatorForm) => {
     setIsCalculating(true);
     
     setTimeout(() => {

@@ -33,7 +33,7 @@ export default function MaxPotentialJumpCalculator() {
   const [isCalculating, setIsCalculating] = useState(false);
 
   const form = useForm<MaxPotentialCalculatorForm>({
-    resolver: zodResolver(maxPotentialSchema),
+    resolver: zodResolver(maxPotentialCalculatorSchema),
     defaultValues: {
       trainingExperience: "intermediate",
       athleticBackground: "recreational",
@@ -46,7 +46,7 @@ export default function MaxPotentialJumpCalculator() {
     },
   });
 
-  const calculateMaxPotential = (data: MaxPotentialForm) => {
+  const calculateMaxPotential = (data: MaxPotentialCalculatorForm) => {
     setIsCalculating(true);
     
     setTimeout(() => {
