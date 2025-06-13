@@ -428,7 +428,7 @@ export default function DunkingRequirementsByHeight() {
             <Link href="/vertical-jump-training">
               <Button 
                 size="lg" 
-                className="bg-blue-600 text-white hover:bg-blue-700"
+                className="bg-white text-orange-600 hover:bg-gray-100"
                 style={{ fontWeight: '600' }}
               >
                 Start Training Program
