@@ -418,9 +418,8 @@ export default function DunkingRequirementsByHeight() {
             <Link href="/">
               <Button 
                 size="lg" 
-                variant="secondary" 
-                className="text-gray-900"
-                style={{ color: '#111827', fontWeight: '600' }}
+                className="bg-white text-orange-600 hover:bg-gray-100"
+                style={{ fontWeight: '600' }}
               >
                 Calculate Your Requirements
               </Button>
