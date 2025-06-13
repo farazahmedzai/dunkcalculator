@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dunk-calculator.replit.app/sitemap.xml
+Sitemap: https://dunk-calculator.info/sitemap.xml

@@ -3,9 +3,10 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Sitemap.xml route
+  // Dynamic sitemap.xml route that always uses production domain
   app.get('/sitemap.xml', (req, res) => {
-    const baseUrl = req.protocol + '://' + req.get('host');
+    // Always use production domain for sitemap URLs
+    const baseUrl = 'https://dunk-calculator.info';
     
     const pages = [
       { url: '/', priority: '1.0', changefreq: 'weekly' },
@@ -45,9 +46,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.send(sitemap);
   });
 
-  // Robots.txt route
+  // Dynamic robots.txt route that always uses production domain
   app.get('/robots.txt', (req, res) => {
-    const baseUrl = req.protocol + '://' + req.get('host');
+    // Always use production domain for robots.txt
+    const baseUrl = 'https://dunk-calculator.info';
+    
     const robotsTxt = `User-agent: *
 Allow: /
 
