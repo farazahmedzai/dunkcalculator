@@ -148,24 +148,28 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-orange-600 to-red-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-            Dunk Calculator – See Exactly What You Need to Fly
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto drop-shadow-md">
-            Calculate your exact vertical jump requirements, hang-time, and power needed to dunk with scientific precision
-          </p>
-          <Button
-            onClick={() => scrollToSection('calculator')}
-            className="bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all transform hover:scale-105 border-2 border-white"
-            style={{ color: '#ea580c', fontWeight: '600' }}
-            size="lg"
-          >
-            Start Calculating
-            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </Button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+              Dunk Calculator – See Exactly What You Need to Fly
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto drop-shadow-md">
+              Calculate your exact vertical jump requirements, hang-time, and power needed to dunk with scientific precision
+            </p>
+            <div className="flex justify-center">
+              <Button
+                onClick={() => scrollToSection('calculator')}
+                className="bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all transform hover:scale-105 border-2 border-white"
+                style={{ color: '#ea580c', fontWeight: '600' }}
+                size="lg"
+              >
+                Start Calculating
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
