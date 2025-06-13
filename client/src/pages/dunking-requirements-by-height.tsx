@@ -161,6 +161,7 @@ export default function DunkingRequirementsByHeight() {
             <Button
               onClick={() => scrollToSection('height-breakdown')}
               className="bg-white text-orange-600 px-8 py-4 font-semibold text-lg hover:bg-gray-100"
+              style={{ color: '#ea580c', fontWeight: '600' }}
             >
               Find Your Requirements
             </Button>
@@ -415,12 +416,22 @@ export default function DunkingRequirementsByHeight() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">
-              <Button size="lg" variant="secondary" className="text-gray-900">
+              <Button 
+                size="lg" 
+                variant="secondary" 
+                className="text-gray-900"
+                style={{ color: '#111827', fontWeight: '600' }}
+              >
                 Calculate Your Requirements
               </Button>
             </Link>
             <Link href="/vertical-jump-training">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white text-white hover:bg-white hover:text-gray-900"
+                style={{ color: 'white', fontWeight: '600', borderColor: 'white' }}
+              >
                 Start Training Program
               </Button>
             </Link>
