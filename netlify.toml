@@ -3,6 +3,11 @@
   command = "npm install && node build-static.js"
 
 [[redirects]]
+  from = "/ads.txt"
+  to = "https://srv.adstxtmanager.com/19390/https://dunk-calculator.info/"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
