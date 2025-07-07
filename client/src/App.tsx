@@ -18,6 +18,7 @@ import CanIDunk from "@/pages/can-i-dunk";
 import HowToDunkABasketball from "@/pages/how-to-dunk-a-basketball";
 import DunkingRequirementsByHeight from "@/pages/dunking-requirements-by-height";
 import TypesOfDunksExplained from "@/pages/guides/types-of-dunks-explained";
+import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -37,6 +38,7 @@ function Router() {
       <Route path="/how-to-dunk-a-basketball" component={HowToDunkABasketball} />
       <Route path="/dunking-requirements-by-height" component={DunkingRequirementsByHeight} />
       <Route path="/guides/types-of-dunks-explained" component={TypesOfDunksExplained} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route component={NotFound} />
     </Switch>
   );

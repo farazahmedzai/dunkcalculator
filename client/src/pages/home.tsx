@@ -948,6 +948,7 @@ export default function Home() {
               <h4 className="text-lg font-semibold mb-4">Resources</h4>
               <ul className="space-y-2">
                 <li><Link href="/dunking-requirements-by-height" className="text-gray-400 hover:text-white transition-colors">Height Requirements</Link></li>
+                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/guides/types-of-dunks-explained" className="text-gray-400 hover:text-white transition-colors">Dunk Types Guide</Link></li>
                 <li><button onClick={() => scrollToSection('faq')} className="text-gray-400 hover:text-white transition-colors">FAQ</button></li>
                 <li><button onClick={() => scrollToSection('physics')} className="text-gray-400 hover:text-white transition-colors">Physics</button></li>
