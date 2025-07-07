@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import EzoicAd from "@/components/shared/ezoic-ad";
 import type { CalculationResults } from "@/pages/home";
 
 interface CalculatorResultsProps {
@@ -137,6 +138,11 @@ export default function CalculatorResults({ results }: CalculatorResultsProps) {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Ad Placement - Between Results */}
+      <div className="flex justify-center py-4">
+        <EzoicAd placementId={103} className="text-center" />
       </div>
 
       {/* Assessment Card */}

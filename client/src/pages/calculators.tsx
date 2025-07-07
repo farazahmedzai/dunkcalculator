@@ -3,6 +3,7 @@ import { Calculator, TrendingUp, Target, Zap, Activity, Weight } from "lucide-re
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import SEOPageLayout from "@/components/shared/seo-page-layout";
+import EzoicAd from "@/components/shared/ezoic-ad";
 import { generateWebPageSchema, generateCalculatorSchema, BreadcrumbItem } from "@/lib/seo";
 
 const calculators = [
@@ -131,6 +132,11 @@ export default function Calculators() {
           </p>
         </div>
 
+        {/* Ad Placement - After Header */}
+        <div className="flex justify-center mb-12">
+          <EzoicAd placementId={105} className="text-center" />
+        </div>
+
         {/* Core Tools Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Core Tools</h2>
@@ -203,6 +209,11 @@ export default function Calculators() {
             })}
           </div>
         </section>
+
+        {/* Ad Placement - Between Sections */}
+        <div className="flex justify-center mb-16">
+          <EzoicAd placementId={106} className="text-center" />
+        </div>
 
         {/* How to Use Section */}
         <section className="mb-16">

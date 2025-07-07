@@ -5,6 +5,7 @@ import CalculatorResults from "@/components/calculator-results";
 import JumpVisualization from "@/components/jump-visualization";
 import FAQSection from "@/components/faq-section";
 import SEOPageLayout from "@/components/shared/seo-page-layout";
+import EzoicAd from "@/components/shared/ezoic-ad";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { generateCalculatorSchema, generateWebPageSchema, generateFAQSchema } from "@/lib/seo";
@@ -173,6 +174,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Ad Placement - After Hero */}
+      <div className="py-8 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+          <EzoicAd placementId={101} className="text-center" />
+        </div>
+      </div>
+
       {/* Main Calculator Section */}
       <section id="calculator" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -190,6 +198,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Ad Placement - After Calculator Results */}
+      <div className="py-8 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+          <EzoicAd placementId={102} className="text-center" />
+        </div>
+      </div>
 
       {/* What Influences Dunking Ability Section */}
       <section id="what-influences" className="py-16 bg-gray-50">
@@ -879,6 +894,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Ad Placement - Before FAQ */}
+      <div className="py-8 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+          <EzoicAd placementId={104} className="text-center" />
+        </div>
+      </div>
 
       {/* FAQ Section */}
       <FAQSection />
