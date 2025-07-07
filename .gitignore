@@ -107,3 +107,18 @@ Thumbs.db
 # Replit specific
 .replit
 replit.nix
+
+# Netlify specific
+.netlify/
+functions/
+
+# Large asset files (can be excluded from deployment)
+attached_assets/
+*.PNG
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Build troubleshooting
+deploy-troubleshooting.md
